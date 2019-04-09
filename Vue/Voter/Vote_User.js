@@ -13,11 +13,16 @@ export default class Vote_User extends React.Component {
     super(props);
   }
 
+  VoteSoftSkill = () => {
+    this.props.customProps.navigate('Liste_Soft_Skill');
+  }
+
   render() {
+    const { navigate } = this.props.customProps;
     return (
       <View >
           <Image source={{uri: this.props.photo}} style={styles.touchable}/>       
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.VoteSoftSkill}>
               <Text style={styles.text}>{this.props.nom_t_personne} {this.props.prenom_t_personne}</Text>
               <Image source={require('./../../assets/Image/btn_Vote.png')} style={styles.vote_button}/>              
           </TouchableOpacity>       

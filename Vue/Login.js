@@ -18,7 +18,6 @@ export default class Login extends React.Component {
     this.props.navigation.navigate('Bienvenue')
   }
 
-
   render() {
     const { navigate } = this.props.navigation;
     return (

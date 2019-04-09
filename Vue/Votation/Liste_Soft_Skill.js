@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator } from 'react-native';
 import { TextInput } from 'react-native';
-import Vote_User from './Vote_User.js';
+import Un_Soft_Skill from './Un_Soft_Skill.js';
 
 
 
 
-export default class Liste_User_Vote extends React.Component {
-  static navigationOptions = { title: 'ListeUserVote', header: null }; 
+export default class List_Soft_Skill extends React.Component {
+  static navigationOptions = { title: 'ListeSoftSkill', header: null }; 
 
 
   constructor(props) {
@@ -20,15 +20,16 @@ export default class Liste_User_Vote extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://192.168.43.206:1337/promo/getAllStudentInPromo/RO2017RI")
+    fetch("http://192.168.43.206:1337/softskill")
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
             items: result
-          }
-          );          
+          }, () => {
+            console.log("Pomme : \n", this.state.items);
+          });          
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -42,13 +43,16 @@ export default class Liste_User_Vote extends React.Component {
       )
   }
 
-  
+  renderSquare(nom) {
+    return <Un_Soft_Skill nom_t_personne={nom} />;
+  } 
+
 
   render() {
     const { navigate } = this.props.navigation;
     const { error, isLoaded, items } = this.state;
     if (error) {
-      return <Text>{error.message}</Text>;
+      return <Text>Erreur : {error.message}</Text>;
     } else if (!isLoaded) {
       return <View style={[styles.container, styles.horizontal]}>
               <ActivityIndicator size="large" color="#0000ff" />
@@ -56,25 +60,22 @@ export default class Liste_User_Vote extends React.Component {
     } else {
       return (
         <View style={{flex: 1}}>
+        <Text style={styles.text}>Vote pour : Hugo Leboucq</Text>
             <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                return <View style={styles.boxStyle} key={item.id_t_personne}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.photo, this.props.navigation)}</View>;
+                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom)}</View>;
                 })}   
             </ScrollView>        
       </View>
       );
     }
   }
-
-  renderSquare(nom, prenom, image, CustomNavigation) {
-    return <Vote_User nom_t_personne={nom} prenom_t_personne={prenom} photo={image} customProps={CustomNavigation} />;
-  } 
 }
 
 
 const styles = StyleSheet.create({
   boxStyle: {
-    height: 200, 
+    height: 100, 
     width: '40%', 
     margin: 5,
   },
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
   text : {
     textAlign: 'center',
     width: '100%',
+    marginTop: 40,
   },
   container: {
     flex: 1,

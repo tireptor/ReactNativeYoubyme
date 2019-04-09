@@ -44,13 +44,9 @@ export default class Bienvenue extends React.Component {
           <TouchableOpacity style={styles.button} onPress={this.UserVote}>
             <Text>Voter</Text>
           </TouchableOpacity>
-        </View>
-        
-
-        
+        </View>       
         <Text>Merci de vous connecter !</Text>
-      </View>
-      
+      </View>     
     );
   }
 }
