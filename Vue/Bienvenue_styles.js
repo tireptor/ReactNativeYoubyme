@@ -18,34 +18,20 @@ export default StyleSheet.create({
         width: 300,
         height: 40,
         borderColor: 'black',
-        margin: 5
+        margin: 5,
       },pictureContener: {
-        flex: 1,
-        backgroundColor: colors.Blue,
-        width: 200,
-        alignItems: 'center',
+        marginTop: 40,
+        width: '100%',
         justifyContent: 'center',
-        borderColor: 'black',
-        flexDirection: 'row',
-        margin: 5
+        height: 264,
       }, returnButton: {
-        flex: 1,
-        backgroundColor: colors.white,
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        flexDirection: 'row',
+        position: 'absolute',
         width: 40,
         height: 40,
-        borderColor: 'black',
-        margin: 5
       }, title: {
-        flex: 1,
-        backgroundColor: colors.white,
-        alignItems: 'center',
+        width: '100%',
+        textAlign: 'center',
         justifyContent: 'center',
-        borderColor: 'black',
-        color: colors.darkblue,
-        margin: 5,
-        padding: 5,
+        marginTop: 20
       }, 
   });

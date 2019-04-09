@@ -21,7 +21,7 @@ export default class Bienvenue extends React.Component {
   }
 
   UserVote = () => {
-    this.props.navigation.navigate('Select_User_Vote')
+    this.props.navigation.navigate('Liste_User_Vote')
   }
 
   render() {
@@ -34,23 +34,15 @@ export default class Bienvenue extends React.Component {
           </TouchableOpacity>
         </View>
         <Image style={styles.pictureContener} source={require('./../assets/Image/connexion.png')}/>
+        <Text style={styles.title}>Bienvenue Utilisateur</Text>
 
-        <View style={styles.container}>
-          <Text style={styles.title}>Bienvenue Utilisateur</Text>
-        </View>
-
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
-            <Text>Liste des badges obtenus</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.UserVote}>
-            <Text>Voter</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.container}>
-          <Text>Merci de vous connecter !</Text>
-        </View>
+        <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
+          <Text>Liste des badges obtenus</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={this.UserVote}>
+          <Text>Voter</Text>
+        </TouchableOpacity>
+        <Text>Merci de vous connecter !</Text>
       </View>
       
     );
