@@ -33,15 +33,21 @@ export default class Bienvenue extends React.Component {
             <Image source={require('./../assets/Image/retour.png')}/>
           </TouchableOpacity>
         </View>
-        <Image style={styles.pictureContener} source={require('./../assets/Image/connexion.png')}/>
-        <Text style={styles.title}>Bienvenue Utilisateur</Text>
+        <View style={styles.container}>
+          <Image style={styles.pictureContener} source={require('./../assets/Image/connexion.png')}/>
+          <Text style={styles.title}>Bienvenue Utilisateur</Text>
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
+            <Text>Liste des badges obtenus</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={this.UserVote}>
+            <Text>Voter</Text>
+          </TouchableOpacity>
+        </View>
+        
 
-        <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
-          <Text>Liste des badges obtenus</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={this.UserVote}>
-          <Text>Voter</Text>
-        </TouchableOpacity>
+        
         <Text>Merci de vous connecter !</Text>
       </View>
       
