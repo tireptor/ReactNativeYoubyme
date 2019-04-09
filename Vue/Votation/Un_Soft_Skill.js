@@ -15,16 +15,14 @@ export default class Un_Soft_Skill extends React.Component {
 
   render() {
     return (
-      <View>
+      <View  style={styles.container}>
         <Text style={styles.text}>{this.props.nom_t_personne}</Text>
-        <View style={styles.container}>
           <TouchableOpacity style={styles.touchable}>            
               <Text style={styles.button}>+</Text>                    
           </TouchableOpacity>
-          <TouchableOpacity>            
+          <TouchableOpacity style={styles.touchable}>            
               <Text style={styles.button}>-</Text>                    
-          </TouchableOpacity>  
-        </View>              
+          </TouchableOpacity>           
       </View>
     );
   }
@@ -32,19 +30,21 @@ export default class Un_Soft_Skill extends React.Component {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    flexDirection: 'row'
+  ccontainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   touchable: {
       height: '70%',
-      width: '100%',
+      width: '40%',
       justifyContent: 'center',
-      margin: 10
+      backgroundColor: 'red',
   },
   text : {
     textAlign: 'center',
     width: '100%',
+    margin: 10
   },
   button: {
     width: 50,
