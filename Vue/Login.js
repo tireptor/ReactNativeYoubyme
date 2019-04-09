@@ -13,10 +13,6 @@ export default class Login extends React.Component {
     super(props);
     this.state = { Email: 'Email', Password: 'Password' };
   }
-  
-
-  
-
 
   Connexion = () => {
     this.props.navigation.navigate('Bienvenue')
