@@ -13,7 +13,7 @@ export default class Login extends React.Component {
     super(props);
     this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [] };
   }
-  _storeData = async (result) => {
+  _storeCredentialData = async (result) => {
     try {
       console.log('on passe dans store data');
       await AsyncStorage.setItem('token', result.token);
@@ -56,7 +56,7 @@ export default class Login extends React.Component {
     async (result) => {
       console.log('token : ' + result.token);
       //
-      this._storeData(result)
+      this._storeCredentialData(result)
       this._retrieveData(result)
       //
       // console.log('token : ' + result.token);
