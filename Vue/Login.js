@@ -13,7 +13,25 @@ export default class Login extends React.Component {
     super(props);
     this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [] };
   }
-
+  _storeData = async (result) => {
+    try {
+      console.log('on passe dans store data');
+      await AsyncStorage.setItem('token', result.token);
+    } catch (error) {
+      console.log('erreur pour stocker le token')
+    }
+  };
+  _retrieveData = async (result) => {
+    try {
+      const value = await AsyncStorage.getItem('token');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+      }
+    } catch (error) {
+      console.log('erreur pour afficher le token')
+    }
+  };
   Connexion = () => {
     console.log('Coucou du connexion');
     this.CheckConnection()
@@ -37,9 +55,14 @@ export default class Login extends React.Component {
   .then(
     async (result) => {
       console.log('token : ' + result.token);
-      AsyncStorage.setItemAsync('token',result.token,keychainService('Alias'))
-      tokenTmp = AsyncStorage.getItemAsync('token',keychainService('Alias'))
-      console.log(tokenTmp)
+      //
+      this._storeData(result)
+      this._retrieveData(result)
+      //
+      // console.log('token : ' + result.token);
+      // await AsyncStorage.setItem('token',result.token)
+      // tokenTmp = AsyncStorage.getItem('token')l
+      // console.log(tokenTmp)
     })
   console.log('CRUD saisie : ' + this.state.Email + ' ' + this.state.Password);
   }
