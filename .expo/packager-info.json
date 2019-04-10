@@ -5,6 +5,6 @@
   "packagerNgrokUrl": "https://packager.23-ubd.tireptor.reactnativeyoubyme.exp.direct",
   "ngrokPid": 21744,
   "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 16780
+  "packagerPort": null,
+  "packagerPid": null
 }

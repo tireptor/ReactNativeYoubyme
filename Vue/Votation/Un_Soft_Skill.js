@@ -13,16 +13,12 @@ export default class Un_Soft_Skill extends React.Component {
     super(props);
   }
 
-  ajoutPoint(idSoftSkill){
+  ajoutPoint = (idSoftSkill) => {
     console.log("Ajout, id softSkill : " + idSoftSkill);
   }
 
-  retirePoint(idSoftSkill){
+  retirePoint = (idSoftSkill) => {
     console.log("Retire, id softSkill : " + idSoftSkill);
-  }
-
-  ListeBadge = (nom) => {
-    console.log("yolo" + nom);
   }
 
   render() {
@@ -30,10 +26,10 @@ export default class Un_Soft_Skill extends React.Component {
       <View  style={styles.container}>
         <Text style={styles.text}>{this.props.nom_t_personne}</Text>
         <View  style={styles.otherContainer}>
-          <TouchableOpacity style={styles.touchable} onPress={this.ListeBadge("lol")}>            
+          <TouchableOpacity style={styles.touchable} onPress={() => this.ajoutPoint(this.props.id_soft_skill)}>            
             <Text style={styles.button}>+</Text>                    
           </TouchableOpacity>
-          <TouchableOpacity style={styles.touchable} onPress={this.retirePoint(this.props.idSoftSkill)}>            
+          <TouchableOpacity style={styles.touchable} onPress={() => this.retirePoint(this.props.id_soft_skill)}>            
             <Text style={styles.button}>-</Text>                    
           </TouchableOpacity>
         </View>                    
