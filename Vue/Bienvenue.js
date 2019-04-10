@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity,AsyncStorage  } from 'react-native';
 import { AppRegistry, TextInput } from 'react-native';
+import Avatar from './Avatar/Avatar.js';
 
 
 import styles from './Bienvenue_styles'
@@ -51,6 +52,10 @@ export default class Bienvenue extends React.Component {
   ListeSession = () => {
     this.props.navigation.navigate('Liste_Session')
   }
+  renderAvatar(avatarPath) {
+    console.log('on est dans renderAvatar avec pour chemin : ' + avatarPath )
+    return <Avatar avatar_path={avatarPath} />;
+  }  
 
   render() {
     const {Nom,PicturePath} = this.state;
@@ -64,7 +69,8 @@ export default class Bienvenue extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
-          <Image style={styles.pictureContener} source={PicturePath}/>
+          {this.renderAvatar('http://192.168.43.206:1337/images/images_youbyme/badge1.png')}
+          
           <Text style={styles.title}>Bienvenue {Nom}</Text>
         </View>
         <View style={styles.container}>

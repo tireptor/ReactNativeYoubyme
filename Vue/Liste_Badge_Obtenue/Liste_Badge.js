@@ -67,6 +67,7 @@ export default class Liste_Badge extends React.Component {
         <View style={{flex: 1}}>
             <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
+                  console.log(item.chemin_badge)
                 return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom_badge, item.chemin_badge)}</View>;
                 })}   
             </ScrollView>        
