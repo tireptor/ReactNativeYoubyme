@@ -64,7 +64,7 @@ export default class Bienvenue extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
-          <Image style={styles.pictureContener} source={PicturePath}/>
+          <Image style={styles.pictureContener} source={require(PicturePath)}/>
           <Text style={styles.title}>Bienvenue {Nom}</Text>
         </View>
         <View style={styles.container}>
