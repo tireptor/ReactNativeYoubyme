@@ -10,7 +10,7 @@ export default class Bienvenue extends React.Component {
   constructor(props) {
     super(props);
     this.state = { Email: 'Email', Password: 'Password', nom : 'bidon' };
-    this._retrieveData
+    this._retrieveData()
   }
   _retrieveData = async (result) => {
     try {
