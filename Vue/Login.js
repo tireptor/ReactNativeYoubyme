@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Alert  } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator,AsyncStorage } from 'react-native';
 import { TextInput } from 'react-native';
 
 
@@ -11,14 +11,41 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { Email: 'Email', Password: 'Password' };
+    this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [] };
   }
 
   Connexion = () => {
+    console.log('Coucou du connexion');
+    this.CheckConnection()
     this.props.navigation.navigate('Bienvenue')
+  }
+  CheckConnection = () => {
+    console.log('Coucou du contrôle de connexion');
+    //http://192.168.43.206:1337/user/login
+    fetch('http://192.168.43.206:1337/user/login', {
+    method: 'POST',
+    headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+    email: this.state.Email,
+    password: this.state.Password,
+    }),
+  })
+  .then(res => res.json())
+  .then(
+    async (result) => {
+      console.log('token : ' + result.token);
+      AsyncStorage.setItemAsync('token',result.token,keychainService('Alias'))
+      tokenTmp = AsyncStorage.getItemAsync('token',keychainService('Alias'))
+      console.log(tokenTmp)
+    })
+  console.log('CRUD saisie : ' + this.state.Email + ' ' + this.state.Password);
   }
 
   render() {
+    console.log("Coucou du render");
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
