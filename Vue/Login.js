@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Alert  } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator,AsyncStorage } from 'react-native';
 import { TextInput } from 'react-native';
 
 
@@ -11,14 +11,64 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { Email: 'Email', Password: 'Password' };
+    this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [] };
   }
-
+  _storeData = async (result) => {
+    try {
+      console.log('on passe dans store data');
+      await AsyncStorage.setItem('token', result.token);
+    } catch (error) {
+      console.log('erreur pour stocker le token')
+    }
+  };
+  _retrieveData = async (result) => {
+    try {
+      const value = await AsyncStorage.getItem('token');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+      }
+    } catch (error) {
+      console.log('erreur pour afficher le token')
+    }
+  };
   Connexion = () => {
+    console.log('Coucou du connexion');
+    this.CheckConnection()
     this.props.navigation.navigate('Bienvenue')
+  }
+  CheckConnection = () => {
+    console.log('Coucou du contrôle de connexion');
+    //http://192.168.43.206:1337/user/login
+    fetch('http://192.168.43.206:1337/user/login', {
+    method: 'POST',
+    headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+    email: this.state.Email,
+    password: this.state.Password,
+    }),
+  })
+  .then(res => res.json())
+  .then(
+    async (result) => {
+      console.log('token : ' + result.token);
+      //
+      this._storeData(result)
+      this._retrieveData(result)
+      //
+      // console.log('token : ' + result.token);
+      // await AsyncStorage.setItem('token',result.token)
+      // tokenTmp = AsyncStorage.getItem('token')l
+      // console.log(tokenTmp)
+    })
+  console.log('CRUD saisie : ' + this.state.Email + ' ' + this.state.Password);
   }
 
   render() {
+    console.log("Coucou du render");
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
