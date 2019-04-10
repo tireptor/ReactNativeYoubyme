@@ -4,12 +4,11 @@ import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text } fr
 export default class Badge extends React.Component {
     render() {
       return (
-        <View >
+        <View>
             <Image source={{uri: this.props.chemin_badge}} style={styles.touchable}/>       
             <TouchableOpacity>
                 <Text style={styles.text}>{this.props.nom_badge}</Text>              
-            </TouchableOpacity>
-            
+            </TouchableOpacity>        
         </View>
       );
     }

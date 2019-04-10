@@ -1,10 +1,10 @@
 {
   "expoServerPort": 19000,
   "webpackServerPort": null,
-  "expoServerNgrokUrl": "https://23-ubd.tireptor.reactnativeyoubyme.exp.direct",
-  "packagerNgrokUrl": "https://packager.23-ubd.tireptor.reactnativeyoubyme.exp.direct",
-  "ngrokPid": 21524,
+  "expoServerNgrokUrl": "https://23-ubd.anonymous.reactnativeyoubyme.exp.direct",
+  "packagerNgrokUrl": "https://packager.23-ubd.anonymous.reactnativeyoubyme.exp.direct",
+  "ngrokPid": 4340,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 24724
+  "packagerPid": 6992
 }

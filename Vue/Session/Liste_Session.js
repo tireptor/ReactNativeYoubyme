@@ -77,7 +77,7 @@ export default class List_Session extends React.Component {
 
 const styles = StyleSheet.create({
   boxStyle: {
-    height: 100, 
+    height: 200, 
     width: '40%', 
     margin: 5,
   },
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: '100%',
     marginTop: 40,
+    marginBottom: 40,
   },
   container: {
     flex: 1,

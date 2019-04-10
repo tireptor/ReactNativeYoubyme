@@ -11,49 +11,56 @@ export default class Session extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      dateFormated: '',
+    };
+    this.ParseDate()
   }
 
   VoteUser = () => {
     this.props.customProps.navigate('Liste_User_Vote');
   }
 
+  ParseDate = () => {
+    var d = new Date(this.props.date_Fin);
+    var dateFin = d.getUTCDate() +  "/" + d.getMonth() + "/" + d.getUTCFullYear();
+    this.state.dateFormated = dateFin;
+    console.log("Date : " + this.state.dateFormated);
+  }
+
+
+
+
+
   render() {
     const { navigate } = this.props.customProps;
     return (
-      <View>
-        <TouchableOpacity style={styles.touchable} onPress={this.VoteUser}>            
-            <Text style={styles.button}>Nom : {this.props.nom_t_personne}</Text>
-            <Text style={styles.button}>Prenom : {this.props.prenom_t_personne}</Text> 
-            <Text style={styles.button}>Photo : {this.props.photo_Pers_Session}</Text> 
-            <Text style={styles.button}>Date debut : {this.props.dateDebut}</Text> 
-            <Text style={styles.button}>Date Fin : {this.props.dateFin}</Text>
-            <Text style={styles.button}>ID periode : {this.props.id_Periode}</Text>                     
-          </TouchableOpacity>
-      </View>
+        <TouchableOpacity style={styles.container} onPress={this.VoteUser}>
+          <Image source={{uri: this.props.photo_Pers_Session}} style={styles.photo}/>
+          <View style={styles.otherContainer} >
+            <Text>{this.props.nom_t_personne} {this.props.prenom_t_personne}</Text>
+            <Text>Date Fin : {this.state.dateFormated}</Text>
+          </View>                                 
+        </TouchableOpacity>
     );
   }
 }
 
 
 const styles = StyleSheet.create({
-  boxStyle: {
-    height: 200, 
-    width: '40%', 
-    margin: 5,
+  container: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  touchable: {
-      height: '70%',
-      width: '100%',
-      justifyContent: 'center'
+  otherContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  vote_button: {
-      height: 40, 
-      width: '100%', 
-      marginTop: 10
+  photo: {
+    height: 100,
+    width: 100
   },
-  text : {
-    textAlign: 'center',
-    width: '100%',
-  }
 });
 
