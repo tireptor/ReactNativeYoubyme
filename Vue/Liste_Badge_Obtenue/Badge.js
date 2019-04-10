@@ -7,8 +7,7 @@ export default class Badge extends React.Component {
         <View >
             <Image source={{uri: this.props.chemin_badge}} style={styles.touchable}/>       
             <TouchableOpacity>
-                <Text style={styles.text}>{this.props.nom_badge}</Text>
-                <Image source={require('./../../assets/Image/btn_Vote.png')} style={styles.vote_button}/>              
+                <Text style={styles.text}>{this.props.nom_badge}</Text>              
             </TouchableOpacity>
             
         </View>

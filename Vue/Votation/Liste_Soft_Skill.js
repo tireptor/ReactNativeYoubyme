@@ -43,8 +43,8 @@ export default class List_Soft_Skill extends React.Component {
       )
   }
 
-  renderSquare(nom) {
-    return <Un_Soft_Skill nom_t_personne={nom} />;
+  renderSquare(nom, idSoftSkill) {
+    return <Un_Soft_Skill nom_t_personne={nom} idSoftSkill={idSoftSkill} />;
   } 
 
 
@@ -52,7 +52,9 @@ export default class List_Soft_Skill extends React.Component {
     const { navigate } = this.props.navigation;
     const { error, isLoaded, items } = this.state;
     if (error) {
-      return <Text>Erreur : {error.message}</Text>;
+      return <View style={[styles.container, styles.horizontal]}>
+                <Text>Erreur : {error.message}</Text>;
+            </View>
     } else if (!isLoaded) {
       return <View style={[styles.container, styles.horizontal]}>
               <ActivityIndicator size="large" color="#0000ff" />
@@ -60,13 +62,13 @@ export default class List_Soft_Skill extends React.Component {
     } else {
       return (
         <View style={{flex: 1}}>
-        <Text style={styles.text}>Vote pour : Hugo Leboucq</Text>
-            <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
+          <Text style={styles.text}>Vote pour : Hugo Leboucq</Text>
+          <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom)}</View>;
+                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom, item.id)}</View>;
                 })}   
-            </ScrollView>        
-      </View>
+          </ScrollView>        
+        </View>
       );
     }
   }
