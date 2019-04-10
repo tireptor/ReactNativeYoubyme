@@ -17,8 +17,18 @@ export default class Login extends React.Component {
     try {
       console.log('on passe dans store data');
       await AsyncStorage.setItem('token', result.token);
+      console.log('on stocke le nom');
+      await AsyncStorage.setItem('nom', result.nom);
+      console.log('on stocke le prenom');
+      await AsyncStorage.setItem('prenom', result.prenom);
+      console.log("on stocke l'email");
+      await AsyncStorage.setItem('email', result.email);
+      console.log("on stocke l'id");
+      chId = parseInt(result.id)
+      console.log(chId)
+      await AsyncStorage.setItem('id', chId);
     } catch (error) {
-      console.log('erreur pour stocker le token')
+      console.log('erreur pour stocker les données')
     }
   };
   _retrieveData = async (result) => {
