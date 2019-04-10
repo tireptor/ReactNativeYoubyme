@@ -20,8 +20,12 @@ export default class Login extends React.Component {
       await AsyncStorage.setItem('nom', result.nom);
       await AsyncStorage.setItem('prenom', result.prenom);
       await AsyncStorage.setItem('email', result.email);
+      await AsyncStorage.setItem('picture', result.picture);
+      await AsyncStorage.setItem('promo', result.promos[0].id);
       chId = result.id.toString()
+      chGroupe = result.id.toString()
       await AsyncStorage.setItem('id', chId);
+      await AsyncStorage.setItem('groupe', chGroupe);
     } catch (error) {
       console.log('erreur pour stocker les données' + error)
     }
@@ -34,7 +38,7 @@ export default class Login extends React.Component {
         console.log(value);
       }
     } catch (error) {
-      console.log('erreur pour afficher le token')
+      console.log('erreur pour afficher le token' + error)
     }
   };
   Connexion = () => {
