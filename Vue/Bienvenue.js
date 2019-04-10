@@ -20,8 +20,8 @@ export default class Bienvenue extends React.Component {
     this.props.navigation.navigate('Liste_Badge')
   }
 
-  UserVote = () => {
-    this.props.navigation.navigate('Liste_User_Vote')
+  ListeSession = () => {
+    this.props.navigation.navigate('Liste_Session')
   }
 
   render() {
@@ -41,7 +41,7 @@ export default class Bienvenue extends React.Component {
           <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
             <Text>Liste des badges obtenus</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.UserVote}>
+          <TouchableOpacity style={styles.button} onPress={this.ListeSession}>
             <Text>Voter</Text>
           </TouchableOpacity>
         </View>       
