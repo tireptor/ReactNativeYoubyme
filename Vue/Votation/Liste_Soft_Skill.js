@@ -44,7 +44,7 @@ export default class List_Soft_Skill extends React.Component {
   }
 
   renderSquare(nom, idSoftSkill) {
-    return <Un_Soft_Skill nom_t_personne={nom} idSoftSkill={idSoftSkill} />;
+    return <Un_Soft_Skill nom_t_personne={nom} id_soft_skill={idSoftSkill} />;
   } 
 
 
