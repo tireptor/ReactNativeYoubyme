@@ -14,6 +14,9 @@ export default class Vote_User extends React.Component {
   }
 
   VoteSoftSkill = () => {
+    this.props.customProps.navigate("Liste_Soft_Skill", {
+      name: this.props.nom_t_personne + " " + this.props.prenom_t_personne,
+    });
     this.props.customProps.navigate('Liste_Soft_Skill');
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator, AsyncStorage } from 'react-native';
 import { TextInput } from 'react-native';
 import Session from './Session.js';
 
@@ -15,12 +15,36 @@ export default class List_Session extends React.Component {
     this.state = {
         error: null,
         isLoaded: false,
-        items: []
+        items: [],
+        promo: ''
       };
+    this._retrieveData()
   }
 
-  componentDidMount() {
-    fetch("http://192.168.43.206:1337/vote/getAllSessionVoteWithPilotWherePromo/RO2017RI")
+  _retrieveData = async (result) => {
+    try {
+      console.log('On est passé dans retrieveData');
+      const value = await AsyncStorage.getItem('promo');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+        this.setState({
+          promo : value
+        }
+        ); 
+      }
+      this.GatherDataFromBase();
+    } catch (error) {
+      console.log('erreur pour afficher le token')
+      this.setState({
+        promo : 'error'
+      }
+      );
+    }
+  };
+
+  GatherDataFromBase() {
+    fetch("http://192.168.43.206:1337/vote/getAllSessionVoteWithPilotWherePromo/" + this.state.promo)
       .then(res => res.json())
       .then(
         (result) => {
