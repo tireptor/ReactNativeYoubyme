@@ -24,9 +24,10 @@ export default class Session extends React.Component {
         <TouchableOpacity style={styles.touchable} onPress={this.VoteUser}>            
             <Text style={styles.button}>Nom : {this.props.nom_t_personne}</Text>
             <Text style={styles.button}>Prenom : {this.props.prenom_t_personne}</Text> 
-            <Text style={styles.button}>Photo : {this.props.photo}</Text> 
+            <Text style={styles.button}>Photo : {this.props.photo_Pers_Session}</Text> 
             <Text style={styles.button}>Date debut : {this.props.dateDebut}</Text> 
-            <Text style={styles.button}>Date Fin : {this.props.dateFin}</Text>                     
+            <Text style={styles.button}>Date Fin : {this.props.dateFin}</Text>
+            <Text style={styles.button}>ID periode : {this.props.id_Periode}</Text>                     
           </TouchableOpacity>
       </View>
     );
