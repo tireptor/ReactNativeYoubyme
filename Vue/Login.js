@@ -11,24 +11,19 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [] };
+    this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [], IsConnected : false, ConnectionEnCours : false, IsLoaded : false };
   }
   _storeCredentialData = async (result) => {
     try {
       console.log('on passe dans store data');
       await AsyncStorage.setItem('token', result.token);
-      console.log('on stocke le nom');
       await AsyncStorage.setItem('nom', result.nom);
-      console.log('on stocke le prenom');
       await AsyncStorage.setItem('prenom', result.prenom);
-      console.log("on stocke l'email");
       await AsyncStorage.setItem('email', result.email);
-      console.log("on stocke l'id");
-      chId = parseInt(result.id)
-      console.log(chId)
+      chId = result.id.toString()
       await AsyncStorage.setItem('id', chId);
     } catch (error) {
-      console.log('erreur pour stocker les données')
+      console.log('erreur pour stocker les données' + error)
     }
   };
   _retrieveData = async (result) => {
@@ -43,9 +38,36 @@ export default class Login extends React.Component {
     }
   };
   Connexion = () => {
+    this.setState({
+      ConnectionEnCours: true,
+    }
+    );  
     console.log('Coucou du connexion');
-    this.CheckConnection()
-    this.props.navigation.navigate('Bienvenue')
+    if (this.CheckConnection())
+    {
+      this.props.navigation.navigate('Bienvenue')
+    }
+  }
+  Traitement = (result) => {
+    if (result.token != undefined)
+    {
+      console.log('Le token est saisie');
+      this.setState({
+        IsConnected : true,
+        ConnectionEnCours : false
+      }
+      ); 
+      this.props.navigation.navigate('Bienvenue')
+    }
+    else
+    {
+      console.log('Le token est undefined');
+      this.setState({
+        IsConnected : false,
+        ConnectionEnCours : false
+      }
+      ); 
+    }
   }
   CheckConnection = () => {
     console.log('Coucou du contrôle de connexion');
@@ -63,24 +85,30 @@ export default class Login extends React.Component {
   })
   .then(res => res.json())
   .then(
-    async (result) => {
+     async (result) => {
       console.log('token : ' + result.token);
       //
       this._storeCredentialData(result)
-      this._retrieveData(result)
+      this.Traitement(result)
+
       //
-      // console.log('token : ' + result.token);
-      // await AsyncStorage.setItem('token',result.token)
-      // tokenTmp = AsyncStorage.getItem('token')l
-      // console.log(tokenTmp)
+
     })
   console.log('CRUD saisie : ' + this.state.Email + ' ' + this.state.Password);
+  console.log(this.IsConnected)
+  return this.IsConnected
   }
 
   render() {
+    const {ConnectionEnCours, IsConnected } = this.state;
     console.log("Coucou du render");
     const { navigate } = this.props.navigation;
-    return (
+    if (ConnectionEnCours) {
+      return <View style={[styles.container, styles.horizontal]}>
+      <ActivityIndicator size="large" color="#0000ff" />
+     </View>
+    }
+    else{return (
       <View style={styles.container}>
         <View style={styles.container}>
          <Image source={require('./../assets/Image/YouByMe_Logo.png')}/>
@@ -102,7 +130,8 @@ export default class Login extends React.Component {
         </View>
       </View>
       
-    );
+    );}
+    
   }
 }
 
@@ -113,4 +142,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
 });

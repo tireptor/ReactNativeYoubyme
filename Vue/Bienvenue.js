@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity,AsyncStorage  } from 'react-native';
 import { AppRegistry, TextInput } from 'react-native';
 
 
@@ -9,9 +9,28 @@ export default class Bienvenue extends React.Component {
   static navigationOptions = { title: 'Bienvenue', header: null }; 
   constructor(props) {
     super(props);
-    this.state = { Email: 'Email', Password: 'Password' };
+    this.state = { Email: 'Email', Password: 'Password', nom : 'bidon' };
+    this._retrieveData
   }
-
+  _retrieveData = async (result) => {
+    try {
+      console.log('On est passé dans retrieveDate');
+      const value = await AsyncStorage.getItem('nom');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+        this.setState({
+          nom : value
+        }
+        ); 
+      }
+    } catch (error) {
+      console.log('erreur pour afficher le token')
+    }
+  };
+  Bidon = () => {
+    return 'bidon'
+  }
   Deconnexion = () => {
     this.props.navigation.navigate('Login')
   }
@@ -25,9 +44,11 @@ export default class Bienvenue extends React.Component {
   }
 
   render() {
+    const {nom} = this.state;
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
+        
         <View style={styles.returnButton}>
           <TouchableOpacity onPress={this.Deconnexion}>
             <Image source={require('./../assets/Image/retour.png')}/>
@@ -35,7 +56,7 @@ export default class Bienvenue extends React.Component {
         </View>
         <View style={styles.container}>
           <Image style={styles.pictureContener} source={require('./../assets/Image/connexion.png')}/>
-          <Text style={styles.title}>Bienvenue Utilisateur</Text>
+          <Text style={styles.title}>Bienvenue {nom}</Text>
         </View>
         <View style={styles.container}>
           <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
