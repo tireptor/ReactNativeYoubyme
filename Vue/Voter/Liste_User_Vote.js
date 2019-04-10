@@ -56,6 +56,7 @@ export default class Liste_User_Vote extends React.Component {
     } else {
       return (
         <View style={{flex: 1}}>
+            <Text style={styles.text}>Eleves disponibles</Text>
             <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
                 return <View style={styles.boxStyle} key={item.id_t_personne}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.photo, this.props.navigation)}</View>;
@@ -91,6 +92,8 @@ const styles = StyleSheet.create({
   text : {
     textAlign: 'center',
     width: '100%',
+    marginTop: 40,
+    marginBottom: 40,
   },
   container: {
     flex: 1,

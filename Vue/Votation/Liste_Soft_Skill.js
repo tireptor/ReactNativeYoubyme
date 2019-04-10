@@ -17,6 +17,7 @@ export default class List_Soft_Skill extends React.Component {
         isLoaded: false,
         items: []
       };
+      this.params = this.props.navigation.state.params;
   }
 
   componentDidMount() {
@@ -62,7 +63,7 @@ export default class List_Soft_Skill extends React.Component {
     } else {
       return (
         <View style={{flex: 1}}>
-          <Text style={styles.text}>Vote pour : Hugo Leboucq</Text>
+          <Text style={styles.text}>Vote pour : {this.params.name}</Text>
           <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
                 return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom, item.id)}</View>;
