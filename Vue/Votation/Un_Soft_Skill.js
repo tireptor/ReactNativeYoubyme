@@ -11,15 +11,52 @@ export default class Un_Soft_Skill extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      error: null,
+      voteEnCours: false,
+      isLoaded: false,
+      items: []
+    };
   }
 
   ajoutPoint = (idSoftSkill, idPersonneVote, idUser, idPeriode) => {
+    fetch("http://192.168.43.206:1337/vote/voteUser" , {
+      method: 'POST',
+      headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+      idPeriode: idPeriode,
+      idPersVotant: idUser,
+      idPersVote: idPersonneVote,
+      idSoftSkill: idSoftSkill,
+      }),
+    }) 
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result
+          }
+          );          
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
     console.log("Ajout, id softSkill : " + idSoftSkill + " ID personne voté : " + idPersonneVote + " ID user: " + idUser + " ID periode: " + idPeriode);
   }
 
   retirePoint = (idSoftSkill, idPersonneVote, idUser, idPeriode) => {
     console.log("Retire, id softSkill : " + idSoftSkill + " ID personne voté : " + idPersonneVote + " ID user: " + idUser + " ID periode: " + idPeriode);
   }
+
+
 
   render() {
     return (

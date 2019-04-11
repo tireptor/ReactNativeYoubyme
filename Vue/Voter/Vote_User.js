@@ -70,10 +70,12 @@ export default class Vote_User extends React.Component {
         );
       }
       else{
+        return(
         <View style={styles.container}>
           <Image source={{uri: this.props.photo}} style={styles.touchable}/> 
           <Text>DEJA VOTE</Text>
         </View>
+        )
       }
       
     }
