@@ -62,7 +62,7 @@ export default class Bienvenue extends React.Component {
         <View style={styles.container}>
           {this.renderAvatar('http://192.168.43.206:1337/images/images_youbyme/badge1.png')}
           
-          <Text style={styles.title}>Bienvenue {Nom}</Text>
+          <Text style={styles.title}>Bienvenue {nom}</Text>
         </View>
         <View style={styles.container}>
           <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
