@@ -11,21 +11,36 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [], IsConnected : false, ConnectionEnCours : false, IsLoaded : false };
+    this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [], IsConnected : false, ConnectionEnCours : false, IsLoaded : false, BadCredential : false };
     this.CheckUserIsAlreadyConnected()
   }
   _storeCredentialData = async (result) => {
     try {
-      await AsyncStorage.setItem('token', result.token);
-      await AsyncStorage.setItem('nom', result.nom);
-      await AsyncStorage.setItem('prenom', result.prenom);
-      await AsyncStorage.setItem('email', result.email);
-      await AsyncStorage.setItem('picture', result.picture);
-      await AsyncStorage.setItem('promo', result.promos[0].id);
-      chId = result.id.toString()
-      chGroupe = result.id.toString()
-      await AsyncStorage.setItem('id', chId);
-      await AsyncStorage.setItem('groupe', chGroupe);
+      if (result.token == undefined)
+      {
+        console.log('Token est undefined')
+        await AsyncStorage.removeItem('token')
+        await AsyncStorage.removeItem('nom')
+        await AsyncStorage.removeItem('prenom')
+        await AsyncStorage.removeItem('email')
+        await AsyncStorage.removeItem('picture')
+        await AsyncStorage.removeItem('promo')
+        await AsyncStorage.removeItem('id')
+        await AsyncStorage.removeItem('groupe')
+      }
+      else {
+        await AsyncStorage.setItem('token', result.token);
+        await AsyncStorage.setItem('nom', result.nom);
+        await AsyncStorage.setItem('prenom', result.prenom);
+        await AsyncStorage.setItem('email', result.email);
+        await AsyncStorage.setItem('picture', result.picture);
+        await AsyncStorage.setItem('promo', result.promos[0].id);
+        chId = result.id.toString()
+        chGroupe = result.id.toString()
+        await AsyncStorage.setItem('id', chId);
+        await AsyncStorage.setItem('groupe', chGroupe);
+      }
+
     } catch (error) {
       console.log('erreur pour stocker les données' + error)
     }
@@ -35,7 +50,7 @@ export default class Login extends React.Component {
       const value = await AsyncStorage.getItem('token');
       if (value !== null) {
         // We have data!!
-        console.log(value);
+        console.log('Vérification si user déjà connecté : '+value);
         this.props.navigation.navigate('Bienvenue')
       }
     } catch (error) {
@@ -66,7 +81,8 @@ export default class Login extends React.Component {
     {
       this.setState({
         IsConnected : true,
-        ConnectionEnCours : false
+        ConnectionEnCours : false,
+        BadCredential : false
       }
       ); 
       this.props.navigation.navigate('Bienvenue')
@@ -75,7 +91,8 @@ export default class Login extends React.Component {
     {
       this.setState({
         IsConnected : false,
-        ConnectionEnCours : false
+        ConnectionEnCours : false,
+        BadCredential : true
       }
       ); 
     }
@@ -96,18 +113,45 @@ export default class Login extends React.Component {
   .then(
      async (result) => {
       this._storeCredentialData(result)
+      console.log('On vat faire le traitement !')
       this.Traitement(result)
     })
   return this.IsConnected
   }
 
   render() {
-    const {ConnectionEnCours, IsConnected } = this.state;
+    const {ConnectionEnCours, IsConnected, BadCredential } = this.state;
     const { navigate } = this.props.navigation;
     if (ConnectionEnCours) {
       return <View style={[styles.container, styles.horizontal]}>
       <ActivityIndicator size="large" color="#0000ff" />
      </View>
+    }
+    else if (BadCredential)
+    {
+      return (
+        <View style={styles.container}>
+          <View style={styles.container}>
+           <Image source={require('./../assets/Image/YouByMe_Logo.png')}/>
+          </View>
+          <View style={styles.container}>
+            <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
+            onChangeText={(Email) => this.setState({Email})}
+            value={this.state.Email}
+          />
+          <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
+            onChangeText={(Password) => this.setState({Password})}
+            value={this.state.Password}
+          />
+          <Text style = {styles.badCredential}>Adresse Email ou Mot de passe incorrect !</Text>
+          </View>
+          <View style={styles.container}>
+            <TouchableOpacity style={{height: 40, width: 300, borderColor: 'black',margin: '1%'}} onPress={this.Connexion}>
+              <Image source={require('./../assets/Image/btn_connexion.png')}/>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
     }
     else{return (
       <View style={styles.container}>
@@ -147,5 +191,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10
+  },
+  badCredential: {
+    color: 'red',
   }
 });
