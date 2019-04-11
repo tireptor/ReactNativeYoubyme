@@ -15,7 +15,8 @@ export default class Un_Soft_Skill extends React.Component {
       error: null,
       voteEnCours: false,
       isLoaded: false,
-      items: []
+      items: [],
+      checked: false,
     };
   }
 
@@ -38,7 +39,8 @@ export default class Un_Soft_Skill extends React.Component {
         (result) => {
           this.setState({
             isLoaded: true,
-            items: result
+            items: result,
+            checked: true
           }
           );
           userVoteItems = 1 
@@ -54,26 +56,40 @@ export default class Un_Soft_Skill extends React.Component {
     console.log("Ajout, id softSkill : " + idSoftSkill + " ID personne voté : " + idPersonneVote + " ID user: " + idUser + " ID periode: " + idPeriode);  
   }
 
-  retirePoint = (idSoftSkill, idPersonneVote, idUser, idPeriode) => {
-    console.log("Retire, id softSkill : " + idSoftSkill + " ID personne voté : " + idPersonneVote + " ID user: " + idUser + " ID periode: " + idPeriode);
+  retirePoint = () => {
+    this.setState({
+      checked: false
+    })
   }
 
-
-
   render() {
-    return (
-      <View  style={styles.container}>
-        <Text style={styles.text}>{this.props.nom_t_personne}</Text>
-        <View  style={styles.otherContainer}>
-          <TouchableOpacity style={styles.touchable} onPress={() => this.ajoutPoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            
-            <Text style={styles.button}>+</Text>                    
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.touchable} onPress={() => this.retirePoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            
-            <Text style={styles.button}>-</Text>                    
-          </TouchableOpacity>
-        </View>                    
-      </View>
-    );
+    if(this.state.checked)
+    {
+      return (
+        <View  style={styles.container}>
+          <Text style={styles.text}>{this.props.nom_t_personne}</Text>
+          <View  style={styles.otherContainer}>
+            <TouchableOpacity style={styles.touchable} onPress={() => this.retirePoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            
+              <Text style={styles.buttonChecked}>+</Text>                    
+            </TouchableOpacity>
+          </View>                    
+        </View>
+      );
+    }
+    else
+    {
+      return (
+        <View  style={styles.container}>
+          <Text style={styles.text}>{this.props.nom_t_personne}</Text>
+          <View  style={styles.otherContainer}>
+            <TouchableOpacity style={styles.touchable} onPress={() => this.ajoutPoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            
+              <Text style={styles.button}>+</Text>                    
+            </TouchableOpacity>
+          </View>                    
+        </View>
+      );
+    }
+    
   }
 }
 
@@ -109,6 +125,18 @@ const styles = StyleSheet.create({
     margin: 10,
     lineHeight:35,
     fontSize:20,
+  },
+  buttonChecked: {
+    width: 50,
+    height: 40,
+    borderWidth: 1,
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+    lineHeight:35,
+    fontSize:20,
+    backgroundColor: 'green'
   },
   touchable: {
     justifyContent: 'center',
