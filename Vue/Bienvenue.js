@@ -30,7 +30,7 @@ export default class Bienvenue extends React.Component {
         ); 
       }
     } catch (error) {
-      console.log('erreur lors de la recuperation de donnee (retrieveDate)')
+      console.log('erreur lors de la récuperation de données (retrieveDate)')
     }
     try {
       console.log("On vat chercher l'image");
