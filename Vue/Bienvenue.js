@@ -10,7 +10,7 @@ export default class Bienvenue extends React.Component {
   static navigationOptions = { title: 'Bienvenue', header: null }; 
   constructor(props) {
     super(props);
-    this.state = { Email: 'Email', Password: 'Password', nom : 'bidon' };
+    this.state = { Email: 'Email', Password: 'Password', nom : 'bidon', picture : 'http://192.168.43.206:1337/images/images_youbyme/portrait.png' };
     this._retrieveData()
   }
   _retrieveData = async (result) => {
@@ -27,6 +27,20 @@ export default class Bienvenue extends React.Component {
       }
     } catch (error) {
       console.log('erreur pour afficher le token')
+    }
+    try {
+      console.log("On vat chercher l'image");
+      const valuePicture = await AsyncStorage.getItem('picture');
+      if (valuePicture !== null) {
+        // We have data!!
+        console.log(valuePicture);
+        this.setState({
+          picture : valuePicture
+        }
+        ); 
+      }
+    } catch (error) {
+      console.log("erreur pour afficher l'image")
     }
   };
   Bidon = () => {
@@ -49,22 +63,22 @@ export default class Bienvenue extends React.Component {
   }  
 
   render() {
-    const {nom} = this.state;
+    const {nom,picture} = this.state;
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <View style={styles.containerGlobal}>
         
         <View style={styles.returnButton}>
           <TouchableOpacity onPress={this.Deconnexion}>
             <Image source={require('./../assets/Image/retour.png')}/>
           </TouchableOpacity>
         </View>
-        <View style={styles.container}>
-          {this.renderAvatar('http://192.168.43.206:1337/images/images_youbyme/badge1.png')}
+        <View style={styles.pictureContainer}>
+          {this.renderAvatar(picture)}
           
           <Text style={styles.title}>Bienvenue {nom}</Text>
         </View>
-        <View style={styles.container}>
+        <View style={styles.containerButton}>
           <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
             <Text>Liste des badges obtenus</Text>
           </TouchableOpacity>
@@ -72,7 +86,6 @@ export default class Bienvenue extends React.Component {
             <Text>Voter</Text>
           </TouchableOpacity>
         </View>       
-        <Text>Merci de vous connecter !</Text>
       </View>     
     );
   }

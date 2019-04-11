@@ -12,6 +12,7 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [], IsConnected : false, ConnectionEnCours : false, IsLoaded : false };
+    this.CheckUserIsAlreadyConnected()
   }
   _storeCredentialData = async (result) => {
     try {
@@ -30,6 +31,18 @@ export default class Login extends React.Component {
       console.log('erreur pour stocker les données' + error)
     }
   };
+  CheckUserIsAlreadyConnected = async (result) => {
+    try {
+      const value = await AsyncStorage.getItem('token');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+        this.props.navigation.navigate('Bienvenue')
+      }
+    } catch (error) {
+      console.log('erreur pour afficher le token' + error)
+    }
+  }
   _retrieveData = async (result) => {
     try {
       const value = await AsyncStorage.getItem('token');
@@ -128,9 +141,9 @@ export default class Login extends React.Component {
         />
         </View>
         <View style={styles.container}>
-          <TouchableOpacity style={{height: 40, width: 300, borderColor: 'black'}} onPress={this.Connexion}>
-          <Image style={styles.button} source={require('./../assets/Image/btn_connexion.png')}/>
-        </TouchableOpacity>
+          <TouchableOpacity style={{height: 40, width: 300, borderColor: 'black',margin: '1%'}} onPress={this.Connexion}>
+            <Image source={require('./../assets/Image/btn_connexion.png')}/>
+          </TouchableOpacity>
         </View>
       </View>
       
@@ -145,10 +158,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center'
   },
   horizontal: {
     flexDirection: 'row',

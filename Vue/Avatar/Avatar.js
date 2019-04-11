@@ -22,9 +22,9 @@ export default class Avatar extends React.Component {
       margin: 5,
     },
     touchable: {
-        height: '70%',
-        width: '100%',
-        justifyContent: 'center'
+        height: 200,
+        width: 200,
+        marginTop: 5
     },
     vote_button: {
         height: 40, 

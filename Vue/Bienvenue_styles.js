@@ -2,12 +2,7 @@ import {StyleSheet} from 'react-native'
 
 import colors from './../styles/variables';
 export default StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },  
+
     button: {
         height: 40, 
         width: 300, 
@@ -18,8 +13,12 @@ export default StyleSheet.create({
         justifyContent: 'center',
         marginTop: 5
     },
-    pictureContener: {
-
+    pictureContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      alignItems: 'center',
       }, 
       returnButton: {
         position: 'absolute',
@@ -29,6 +28,44 @@ export default StyleSheet.create({
         height: 40,
       }, 
       title: {
-        width: '100%',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+      },
+      boxStyle: {
+        height: 200, 
+        width: '40%', 
+        margin: 5,
+      },
+      touchable: {
+          height: '100%',
+          width: '100%',
+          justifyContent: 'center'
+      },
+      vote_button: {
+          height: 50, 
+          width: '100%', 
+          marginTop: 10
+      },
+      container: {
+        flex: 1,
+        justifyContent: 'center'
+      },
+      horizontal: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
       }, 
+      containerButton: {
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+      },
+      containerGlobal: {
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+      },
   });
