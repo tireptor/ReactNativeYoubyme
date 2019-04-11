@@ -44,8 +44,8 @@ export default class List_Soft_Skill extends React.Component {
       )
   }
 
-  renderSquare(nom, idSoftSkill, idPersonneVote) {
-    return <Un_Soft_Skill nom_t_personne={nom} id_soft_skill={idSoftSkill} id_personne_vote={idPersonneVote} />;
+  renderSquare(nom, idSoftSkill, idPersonneVote, idUser) {
+    return <Un_Soft_Skill nom_t_personne={nom} id_soft_skill={idSoftSkill} id_personne_vote={idPersonneVote} id_user={idUser}/>;
   } 
 
 
@@ -66,7 +66,7 @@ export default class List_Soft_Skill extends React.Component {
           <Text style={styles.text}>Vote pour : {this.params.name}</Text>
           <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom, item.id, this.params.id_personne_vote)}</View>;
+                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom, item.id, this.params.id_personne_vote, this.params.id_user)}</View>;
                 })}   
           </ScrollView>        
         </View>

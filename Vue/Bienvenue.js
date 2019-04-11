@@ -45,7 +45,9 @@ export default class Bienvenue extends React.Component {
   }
 
   ListeSession = () => {
-    this.props.navigation.navigate('Liste_Session')
+    this.props.navigation.navigate("Liste_Session", {
+      id_user: this.state.id_user
+    });
   }
   renderAvatar(avatarPath) {
     return <Avatar avatar_path={avatarPath} />;

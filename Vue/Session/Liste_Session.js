@@ -18,6 +18,7 @@ export default class List_Session extends React.Component {
         items: [],
         promo: ''
       };
+    this.params = this.props.navigation.state.params;
     this._retrieveData()
   }
 
@@ -67,8 +68,8 @@ export default class List_Session extends React.Component {
       )
   }
 
-  renderSquare(nom, prenom, idPersSession, photoPersSession, dateDebut, dateFin, idPeriode, CustomNavigation) {
-    return <Session nom_t_personne={nom} prenom_t_personne={prenom} id_Pers_Session={idPersSession} photo_Pers_Session={photoPersSession} date_Debut={dateDebut} date_Fin={dateFin} id_Periode={idPeriode} customProps={CustomNavigation}  />;
+  renderSquare(nom, prenom, idPersSession, photoPersSession, dateDebut, dateFin, idPeriode, idUser, CustomNavigation) {
+    return <Session nom_t_personne={nom} prenom_t_personne={prenom} id_Pers_Session={idPersSession} photo_Pers_Session={photoPersSession} date_Debut={dateDebut} date_Fin={dateFin} id_Periode={idPeriode} id_user={idUser} customProps={CustomNavigation}  />;
   } 
 
 
@@ -89,7 +90,7 @@ export default class List_Session extends React.Component {
           <Text style={styles.text}>Session en cours</Text>
           <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                return <View style={styles.boxStyle} key={item.id_periode}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.id_t_personne, item.photo, item.date_debut, item.date_fin, item.id_periode, this.props.navigation)}</View>;
+                return <View style={styles.boxStyle} key={item.id_periode}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.id_t_personne, item.photo, item.date_debut, item.date_fin, item.id_periode, this.params.id_user, this.props.navigation)}</View>;
                 })}   
           </ScrollView>        
         </View>
