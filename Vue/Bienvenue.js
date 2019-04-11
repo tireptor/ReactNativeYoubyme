@@ -10,23 +10,27 @@ export default class Bienvenue extends React.Component {
   static navigationOptions = { title: 'Bienvenue', header: null }; 
   constructor(props) {
     super(props);
-    this.state = { Email: 'Email', Password: 'Password', nom : 'bidon' };
+    this.state = { Email: 'Email', Password: 'Password', nom : '', id_user: '' };
     this._retrieveData()
   }
   _retrieveData = async (result) => {
     try {
-      console.log('On est passé dans retrieveDate');
       const value = await AsyncStorage.getItem('nom');
       if (value !== null) {
-        // We have data!!
-        console.log(value);
         this.setState({
           nom : value
         }
         ); 
       }
+      const idUser = await AsyncStorage.getItem('id');
+      if (idUser !== null) {
+        this.setState({
+          id_user : idUser
+        }
+        ); 
+      }
     } catch (error) {
-      console.log('erreur pour afficher le token')
+      console.log('erreur lors de la recuperation de donnee (retrieveDate)')
     }
   };
   Bidon = () => {
@@ -44,7 +48,6 @@ export default class Bienvenue extends React.Component {
     this.props.navigation.navigate('Liste_Session')
   }
   renderAvatar(avatarPath) {
-    console.log('on est dans renderAvatar avec pour chemin : ' + avatarPath )
     return <Avatar avatar_path={avatarPath} />;
   }  
 
@@ -52,8 +55,7 @@ export default class Bienvenue extends React.Component {
     const {nom} = this.state;
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        
+      <View style={styles.container}>      
         <View style={styles.returnButton}>
           <TouchableOpacity onPress={this.Deconnexion}>
             <Image source={require('./../assets/Image/retour.png')}/>

@@ -6,7 +6,6 @@ export default class Avatar extends React.Component {
       return (
         <View > 
             <TouchableOpacity>
-                {console.log('on passe dans la classe Avatar avec pour propriété : ' + this.props.avatar_path)}    
                 <Image source={{uri: this.props.avatar_path}} style={styles.touchable}/>         
             </TouchableOpacity>
         </View>
