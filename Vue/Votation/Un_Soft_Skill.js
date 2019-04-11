@@ -19,7 +19,7 @@ export default class Un_Soft_Skill extends React.Component {
     };
   }
 
-  ajoutPoint = (idSoftSkill, idPersonneVote, idUser, idPeriode, userVoteItems) => {
+  ajoutPoint = (idSoftSkill, idPersonneVote, idUser, idPeriode) => {
     fetch("http://192.168.43.206:1337/vote/voteUser" , {
       method: 'POST',
       headers: {
@@ -50,6 +50,7 @@ export default class Un_Soft_Skill extends React.Component {
           });
         }
       )
+    this.props.VoteUserItems()
     console.log("Ajout, id softSkill : " + idSoftSkill + " ID personne voté : " + idPersonneVote + " ID user: " + idUser + " ID periode: " + idPeriode);  
   }
 
@@ -64,7 +65,7 @@ export default class Un_Soft_Skill extends React.Component {
       <View  style={styles.container}>
         <Text style={styles.text}>{this.props.nom_t_personne}</Text>
         <View  style={styles.otherContainer}>
-          <TouchableOpacity style={styles.touchable} onPress={() => this.ajoutPoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode, this.props.VoteUserItems)}>            
+          <TouchableOpacity style={styles.touchable} onPress={() => this.ajoutPoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            
             <Text style={styles.button}>+</Text>                    
           </TouchableOpacity>
           <TouchableOpacity style={styles.touchable} onPress={() => this.retirePoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            

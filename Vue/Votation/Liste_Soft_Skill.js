@@ -45,7 +45,7 @@ export default class List_Soft_Skill extends React.Component {
   }
 
   renderSquare(nom, idSoftSkill, idPersonneVote, idUser, idPeriode, voteUserItems) {
-    return <Un_Soft_Skill nom_t_personne={nom} id_soft_skill={idSoftSkill} id_personne_vote={idPersonneVote} id_user={idUser} id_periode={idPeriode} VoteUserItems={voteUserItems}/>;
+    return <Un_Soft_Skill nom_t_personne={nom} id_soft_skill={idSoftSkill} id_personne_vote={idPersonneVote} id_user={idUser} id_periode={idPeriode} VoteUserItems={this.params.VoteUserItems}/>;
   } 
 
 
