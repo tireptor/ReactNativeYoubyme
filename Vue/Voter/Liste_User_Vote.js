@@ -59,7 +59,7 @@ export default class Liste_User_Vote extends React.Component {
             <Text style={styles.text}>Eleves disponibles</Text>
             <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                return <View style={styles.boxStyle} key={item.id_t_personne}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.photo, this.props.navigation)}</View>;
+                return <View style={styles.boxStyle} key={item.id_t_personne}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.photo, item.id_t_personne, this.props.navigation)}</View>;
                 })}   
             </ScrollView>        
       </View>
@@ -67,8 +67,8 @@ export default class Liste_User_Vote extends React.Component {
     }
   }
 
-  renderSquare(nom, prenom, image, CustomNavigation) {
-    return <Vote_User nom_t_personne={nom} prenom_t_personne={prenom} photo={image} customProps={CustomNavigation} />;
+  renderSquare(nom, prenom, image, idPersonne, CustomNavigation) {
+    return <Vote_User nom_t_personne={nom} prenom_t_personne={prenom} photo={image} id_personne={idPersonne} customProps={CustomNavigation} />;
   } 
 }
 

@@ -1,7 +1,9 @@
 {
-  "expoServerPort": null,
-  "webpackServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://23-ubd.anonymous.reactnativeyoubyme.exp.direct",
+  "packagerNgrokUrl": "https://packager.23-ubd.anonymous.reactnativeyoubyme.exp.direct",
+  "ngrokPid": 17200,
+  "devToolsPort": 19002,
+  "packagerPort": 19001,
+  "packagerPid": 11320
 }
