@@ -47,10 +47,26 @@ export default class Bienvenue extends React.Component {
       console.log("erreur pour afficher l'image")
     }
   };
+  _removeCredentialData = async (result) => {
+    try {
+        console.log('Token est undefined')
+        await AsyncStorage.removeItem('token')
+        await AsyncStorage.removeItem('nom')
+        await AsyncStorage.removeItem('prenom')
+        await AsyncStorage.removeItem('email')
+        await AsyncStorage.removeItem('picture')
+        await AsyncStorage.removeItem('promo')
+        await AsyncStorage.removeItem('id')
+        await AsyncStorage.removeItem('groupe')
+    } catch (error) {
+      console.log('erreur pour écraser les données de connexion' + error)
+    }
+  };
   Bidon = () => {
     return 'bidon'
   }
   Deconnexion = () => {
+    this._removeCredentialData()
     this.props.navigation.navigate('Login')
   }
 

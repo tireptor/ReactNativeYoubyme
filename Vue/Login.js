@@ -134,15 +134,18 @@ export default class Login extends React.Component {
           <View style={styles.container}>
            <Image source={require('./../assets/Image/YouByMe_Logo.png')}/>
           </View>
-          <View style={styles.container}>
+          <Text style={styles.title}>Connectez vous</Text>
+          <View style={styles.containerCredential}>
+          <Text style={styles.title}>Email</Text>
             <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
-            onChangeText={(Email) => this.setState({Email})}
-            value={this.state.Email}
-          />
-          <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
-            onChangeText={(Password) => this.setState({Password})}
-            value={this.state.Password}
-          />
+              onChangeText={(Email) => this.setState({Email})}
+              value={this.state.Email}
+            />
+            <Text style={styles.title}>Mot de passe</Text>
+            <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
+              onChangeText={(Password) => this.setState({Password})} defaultValue = {'coucou'}
+              value={this.state.Password}
+            />
           <Text style = {styles.badCredential}>Adresse Email ou Mot de passe incorrect !</Text>
           </View>
           <View style={styles.container}>
@@ -158,11 +161,14 @@ export default class Login extends React.Component {
         <View style={styles.container}>
          <Image source={require('./../assets/Image/YouByMe_Logo.png')}/>
         </View>
-        <View style={styles.container}>
+        <Text style={styles.title}>Connectez vous</Text>
+        <View style={styles.containerCredential}>
+        <Text style={styles.title}>Email</Text>
           <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
           onChangeText={(Email) => this.setState({Email})}
           value={this.state.Email}
         />
+        <Text style={styles.title}>Mot de passe</Text>
         <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
           onChangeText={(Password) => this.setState({Password})}
           value={this.state.Password}
@@ -181,6 +187,14 @@ export default class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  containerCredential: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'gray'
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -194,5 +208,10 @@ const styles = StyleSheet.create({
   },
   badCredential: {
     color: 'red',
-  }
+  },
+  title: {
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
 });
