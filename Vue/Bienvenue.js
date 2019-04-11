@@ -15,18 +15,22 @@ export default class Bienvenue extends React.Component {
   }
   _retrieveData = async (result) => {
     try {
-      console.log('On est passé dans retrieveDate');
       const value = await AsyncStorage.getItem('nom');
       if (value !== null) {
-        // We have data!!
-        console.log(value);
         this.setState({
           nom : value
         }
         ); 
       }
+      const idUser = await AsyncStorage.getItem('id');
+      if (idUser !== null) {
+        this.setState({
+          id_user : idUser
+        }
+        ); 
+      }
     } catch (error) {
-      console.log('erreur pour afficher le token')
+      console.log('erreur lors de la recuperation de donnee (retrieveDate)')
     }
     try {
       console.log("On vat chercher l'image");
@@ -55,10 +59,11 @@ export default class Bienvenue extends React.Component {
   }
 
   ListeSession = () => {
-    this.props.navigation.navigate('Liste_Session')
+    this.props.navigation.navigate("Liste_Session", {
+      id_user: this.state.id_user
+    });
   }
   renderAvatar(avatarPath) {
-    console.log('on est dans renderAvatar avec pour chemin : ' + avatarPath )
     return <Avatar avatar_path={avatarPath} />;
   }  
 
@@ -66,7 +71,7 @@ export default class Bienvenue extends React.Component {
     const {nom,picture} = this.state;
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.containerGlobal}>
+      <View style={styles.container}>
         
         <View style={styles.returnButton}>
           <TouchableOpacity onPress={this.Deconnexion}>

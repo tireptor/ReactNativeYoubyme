@@ -18,7 +18,10 @@ export default class Session extends React.Component {
   }
 
   VoteUser = () => {
-    this.props.customProps.navigate('Liste_User_Vote');
+    this.props.customProps.navigate("Liste_User_Vote", {
+      id_user: this.props.id_user,
+      id_periode: this.props.id_periode
+    });
   }
 
   ParseDate = () => {

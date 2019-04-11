@@ -16,7 +16,6 @@ export default class Login extends React.Component {
   }
   _storeCredentialData = async (result) => {
     try {
-      console.log('on passe dans store data');
       await AsyncStorage.setItem('token', result.token);
       await AsyncStorage.setItem('nom', result.nom);
       await AsyncStorage.setItem('prenom', result.prenom);
@@ -47,8 +46,6 @@ export default class Login extends React.Component {
     try {
       const value = await AsyncStorage.getItem('token');
       if (value !== null) {
-        // We have data!!
-        console.log(value);
       }
     } catch (error) {
       console.log('erreur pour afficher le token' + error)
@@ -59,7 +56,6 @@ export default class Login extends React.Component {
       ConnectionEnCours: true,
     }
     );  
-    console.log('Coucou du connexion');
     if (this.CheckConnection())
     {
       this.props.navigation.navigate('Bienvenue')
@@ -68,7 +64,6 @@ export default class Login extends React.Component {
   Traitement = (result) => {
     if (result.token != undefined)
     {
-      console.log('Le token est saisie');
       this.setState({
         IsConnected : true,
         ConnectionEnCours : false
@@ -78,7 +73,6 @@ export default class Login extends React.Component {
     }
     else
     {
-      console.log('Le token est undefined');
       this.setState({
         IsConnected : false,
         ConnectionEnCours : false
@@ -87,8 +81,6 @@ export default class Login extends React.Component {
     }
   }
   CheckConnection = () => {
-    console.log('Coucou du contrôle de connexion');
-    //http://192.168.43.206:1337/user/login
     fetch('http://192.168.43.206:1337/user/login', {
     method: 'POST',
     headers: {
@@ -103,22 +95,14 @@ export default class Login extends React.Component {
   .then(res => res.json())
   .then(
      async (result) => {
-      console.log('token : ' + result.token);
-      //
       this._storeCredentialData(result)
       this.Traitement(result)
-
-      //
-
     })
-  console.log('CRUD saisie : ' + this.state.Email + ' ' + this.state.Password);
-  console.log(this.IsConnected)
   return this.IsConnected
   }
 
   render() {
     const {ConnectionEnCours, IsConnected } = this.state;
-    console.log("Coucou du render");
     const { navigate } = this.props.navigation;
     if (ConnectionEnCours) {
       return <View style={[styles.container, styles.horizontal]}>
