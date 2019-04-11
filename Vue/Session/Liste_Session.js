@@ -69,7 +69,7 @@ export default class List_Session extends React.Component {
   }
 
   renderSquare(nom, prenom, idPersSession, photoPersSession, dateDebut, dateFin, idPeriode, idUser, CustomNavigation) {
-    return <Session nom_t_personne={nom} prenom_t_personne={prenom} id_Pers_Session={idPersSession} photo_Pers_Session={photoPersSession} date_Debut={dateDebut} date_Fin={dateFin} id_Periode={idPeriode} id_user={idUser} customProps={CustomNavigation}  />;
+    return <Session nom_t_personne={nom} prenom_t_personne={prenom} id_Pers_Session={idPersSession} photo_Pers_Session={photoPersSession} date_Debut={dateDebut} date_Fin={dateFin} id_periode={idPeriode} id_user={idUser} customProps={CustomNavigation}  />;
   } 
 
 
