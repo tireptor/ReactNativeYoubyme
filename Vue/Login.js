@@ -142,7 +142,7 @@ export default class Login extends React.Component {
               value={this.state.Email}
             />
             <Text style={styles.title}>Mot de passe</Text>
-            <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
+            <TextInput secureTextEntry={true} style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
               onChangeText={(Password) => this.setState({Password})} defaultValue = {'coucou'}
               value={this.state.Password}
             />
@@ -169,7 +169,7 @@ export default class Login extends React.Component {
           value={this.state.Email}
         />
         <Text style={styles.title}>Mot de passe</Text>
-        <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
+        <TextInput secureTextEntry={true} style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
           onChangeText={(Password) => this.setState({Password})}
           value={this.state.Password}
         />
