@@ -43,8 +43,8 @@ export default class Liste_Badge extends React.Component {
     this.props.navigation.navigate('Bienvenue')
   }
   
-  renderSquare(i, e) {
-    return <Badge nom_badge={i} chemin_badge={e} />;
+  renderSquare(id, nom, chemin, CustomNavigation) {
+    return <Badge id_badge={id} nom_badge={nom} chemin_badge={chemin} customProps={CustomNavigation}/>;
   }  
 
   
@@ -63,8 +63,7 @@ export default class Liste_Badge extends React.Component {
         <View style={{flex: 1}}>
             <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                  console.log(item.chemin_badge)
-                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom_badge, item.chemin_badge)}</View>;
+                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.id, item.nom_badge, item.chemin_badge, this.props.navigation)}</View>;
                 })}   
             </ScrollView>        
       </View>
