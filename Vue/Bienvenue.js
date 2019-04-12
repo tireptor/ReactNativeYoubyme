@@ -79,6 +79,11 @@ export default class Bienvenue extends React.Component {
       id_user: this.state.id_user
     });
   }
+  ListeTopSoftSkill = () => {
+    this.props.navigation.navigate("Liste_Top_Soft_Skill", {
+      id_user: this.state.id_user
+    });
+  }
   renderAvatar(avatarPath) {
     return <Avatar avatar_path={avatarPath} />;
   }  
@@ -102,6 +107,9 @@ export default class Bienvenue extends React.Component {
         <View style={styles.containerButton}>
           <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
             <Text>Liste des badges obtenus</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={this.ListeTopSoftSkill}>
+            <Text>Top Softskill !</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.ListeSession}>
             <Text>Voter</Text>

@@ -110,9 +110,9 @@ export default class Login extends React.Component {
     }),
   })
   .then(res => res.json())
-  .then(
+  .then (
      async (result) => {
-      this._storeCredentialData(result)
+      await this._storeCredentialData(result)
       console.log('On vat faire le traitement !')
       this.Traitement(result)
     })

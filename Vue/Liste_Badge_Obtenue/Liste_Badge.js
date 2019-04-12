@@ -3,12 +3,8 @@ import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, Act
 import { TextInput } from 'react-native';
 import Badge from './Badge.js';
 
-
-
-
 export default class Liste_Badge extends React.Component {
   static navigationOptions = { title: 'ListeBadge', header: null }; 
-
 
   constructor(props) {
     super(props);
