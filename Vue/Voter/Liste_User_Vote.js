@@ -15,9 +15,20 @@ export default class Liste_User_Vote extends React.Component {
     this.state = {
         error: null,
         isLoaded: false,
-        items: []
+        items: [],
       };
     this.params = this.props.navigation.state.params;
+  }
+
+
+
+  UpdatePageTemp = () => {
+    console.log("En theorie on a refresh");
+    this.forceUpdate();
+    this.setState({
+      updated: true
+    }
+    ); 
   }
 
   componentDidMount() {

@@ -44,8 +44,8 @@ export default class List_Soft_Skill extends React.Component {
       )
   }
 
-  renderSquare(nom, idSoftSkill, idPersonneVote, idUser, idPeriode) {
-    return <Un_Soft_Skill nom_t_personne={nom} id_soft_skill={idSoftSkill} id_personne_vote={idPersonneVote} id_user={idUser} id_periode={idPeriode}/>;
+  renderSquare(nom, idSoftSkill, idPersonneVote, idUser, idPeriode, voteUserItems) {
+    return <Un_Soft_Skill nom_t_personne={nom} id_soft_skill={idSoftSkill} id_personne_vote={idPersonneVote} id_user={idUser} id_periode={idPeriode} VoteUserItems={this.params.VoteUserItems}/>;
   } 
 
 
@@ -63,10 +63,10 @@ export default class List_Soft_Skill extends React.Component {
     } else {
       return (
         <View style={{flex: 1}}>
-          <Text style={styles.text}>Vote pour : {this.params.name} Periode: {this.params.id_periode}</Text>
+          <Text style={styles.text}>Vote pour : {this.params.name}</Text>
           <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom, item.id, this.params.id_personne_vote, this.params.id_user, this.params.id_periode)}</View>;
+                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom, item.id, this.params.id_personne_vote, this.params.id_user, this.params.id_periode, this.params.VoteUserItems)}</View>;
                 })}   
           </ScrollView>        
         </View>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   vote_button: {
       height: 40, 
       width: '100%', 
-      marginTop: 10
+      marginTop: 50
   },
   text : {
     textAlign: 'center',

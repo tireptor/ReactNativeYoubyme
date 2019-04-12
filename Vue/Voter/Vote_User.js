@@ -14,7 +14,7 @@ export default class Vote_User extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
     };
   }
 
@@ -23,7 +23,15 @@ export default class Vote_User extends React.Component {
       name: this.props.nom_t_personne + " " + this.props.prenom_t_personne,
       id_personne_vote: this.props.id_personne,
       id_user: this.props.id_user,
-      id_periode: this.props.id_periode
+      id_periode: this.props.id_periode,
+      VoteUserItems: this.testRefresh,
+    });
+  }
+
+  testRefresh = () => {
+    console.log("youhou")
+    this.setState({
+      items: 1
     });
   }
 
@@ -61,7 +69,7 @@ export default class Vote_User extends React.Component {
       if(items == 0)
       {
         return (
-          <View style={styles.container}>
+          <View style={styles.container}> 
             <TouchableOpacity onPress={this.VoteSoftSkill}>
                 <Image source={{uri: this.props.photo}} style={styles.touchable}/>                
                 <Text style={styles.text}>{this.props.nom_t_personne} {this.props.prenom_t_personne}</Text>           
