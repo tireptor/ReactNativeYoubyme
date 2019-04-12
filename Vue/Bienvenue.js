@@ -80,8 +80,9 @@ export default class Bienvenue extends React.Component {
     });
   }
   ListeTopSoftSkill = () => {
+    console.log("on entre dans listeTopSoftSkill !")
     this.props.navigation.navigate("Liste_Top_Soft_Skill", {
-      id_user: this.state.id_user
+      userId: this.state.id_user,
     });
   }
   renderAvatar(avatarPath) {

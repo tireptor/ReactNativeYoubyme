@@ -144,7 +144,7 @@ export default class Login extends React.Component {
             <Text style={styles.title}>Mot de passe</Text>
             <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
               onChangeText={(Password) => this.setState({Password})} defaultValue = {'coucou'}
-              value={this.state.Password}
+              value={this.state.Password} textContentType={'password'}
             />
           <Text style = {styles.badCredential}>Adresse Email ou Mot de passe incorrect !</Text>
           </View>
@@ -171,7 +171,7 @@ export default class Login extends React.Component {
         <Text style={styles.title}>Mot de passe</Text>
         <TextInput style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, margin: '1%', textAlign:"center"}}
           onChangeText={(Password) => this.setState({Password})}
-          value={this.state.Password}
+          value={this.state.Password} textContentType={'password'}
         />
         </View>
         <View style={styles.container}>

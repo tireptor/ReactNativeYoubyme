@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator } from 'react-native';
 import { TextInput } from 'react-native';
 import Un_Soft_Skill from './Un_Soft_Skill.js';
+import Soft_Skill_Custom from './Soft_Skill_Custom.js';
 
 
 
@@ -15,13 +16,15 @@ export default class Liste_Top_Soft_Skill extends React.Component {
     this.state = {
         error: null,
         isLoaded: false,
-        items: []
+        items: [],
+        userId : 0,
+        chemin : ''
       };
       this.params = this.props.navigation.state.params;
+      this.initPage()
   }
-
-  componentDidMount() {
-    fetch("http://192.168.43.206:1337/softskill")
+  initPage = () => {
+    fetch("http://192.168.43.206:1337/user/count/topSoftSkill/"+this.params.userId+"/5")
       .then(res => res.json())
       .then(
         (result) => {
@@ -40,33 +43,33 @@ export default class Liste_Top_Soft_Skill extends React.Component {
             isLoaded: true,
             error
           });
+          console.log("catch erreur : "+error)
         }
       )
   }
-
-  renderSquare(nom, idSoftSkill, idPersonneVote, idUser, idPeriode) {
-    return <Un_Soft_Skill nom_t_personne={nom} id_soft_skill={idSoftSkill} id_personne_vote={idPersonneVote} id_user={idUser} id_periode={idPeriode}/>;
-  } 
-
-
+  RenderCustomSoftSkill (nomSoftSkil, picture, count )
+  {
+    return <Soft_Skill_Custom nomSoftSkil={nomSoftSkil} count = {count} picture = {picture} />;
+  }
   render() {
-    const { navigate } = this.props.navigation;
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded } = this.state;
+    console.log("On est dans le render")
     if (error) {
-      return <View style={[styles.container, styles.horizontal]}>
-                <Text>Erreur : {error.message}</Text>;
-            </View>
+      console.log("On est en erreur : " + error.message)
+      return <Text>{error.message}</Text>;
     } else if (!isLoaded) {
+      console.log("On est pas chargé")
       return <View style={[styles.container, styles.horizontal]}>
               <ActivityIndicator size="large" color="#0000ff" />
              </View>
     } else {
+      console.log("Dernier return")
       return (
         <View style={{flex: 1}}>
-          <Text style={styles.text}>Vote pour : {this.params.name} Periode: {this.params.id_periode}</Text>
+          <Text style={styles.text}>Mes 5 meilleurs softskill !</Text>
           <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom, item.id, this.params.id_personne_vote, this.params.id_user, this.params.id_periode)}</View>;
+                return <View style={styles.boxStyle} key={item.id_t_soft_skill}>{this.RenderCustomSoftSkill(item.nom_soft_skill, item.chemin_badge, item.count)}</View>;
                 })}   
           </ScrollView>        
         </View>
@@ -78,8 +81,10 @@ export default class Liste_Top_Soft_Skill extends React.Component {
 
 const styles = StyleSheet.create({
   boxStyle: {
-    height: 100, 
-    width: '40%', 
+    height: 200, 
+    width: '40%',
+    alignItems : 'center', 
+    justifyContent: 'center',
     margin: 5,
   },
   touchable: {
