@@ -23,6 +23,15 @@ export default class Avancement_Categorie extends React.Component {
                         items: result
                     }, () => {
                         console.log("Pomme : \n", this.state.items);
+                        if(this.state.items.length > 0)
+                        {
+                            this.props.add_soft_skill();
+                            this.props.soft_skill_obtenue()                           
+                        }
+                        else
+                        {
+                            this.props.add_soft_skill();
+                        }
                     });
                 },
                 // Note: it's important to handle errors here
@@ -39,7 +48,7 @@ export default class Avancement_Categorie extends React.Component {
 
 
 
-    render() {
+    render() {      
         const { error, isLoaded, items } = this.state;
         if (error) {
             return <View style={[styles.container, styles.horizontal]}>
@@ -50,13 +59,26 @@ export default class Avancement_Categorie extends React.Component {
                 <ActivityIndicator size="large" color="#0000ff" />
             </View>
         } else {
-            return (
-                <View>
-                    <Text>{this.props.nom_soft_skill}</Text>
-                    <Image source={{uri: this.props.chemin_badge}} style={styles.photo}/>
-                    <Text>Vote obtenue : {items[0].count}</Text>
-                </View>
-            );
+            if(items.length > 0)
+            {
+                return (
+                    <View style={styles.container}>
+                        <Text>{this.props.nom_soft_skill}</Text>
+                        <Image source={{uri: this.props.chemin_badge}} style={styles.photo}/>
+                        <Text>Vote obtenue : {items[0].count}</Text>
+                    </View>
+                );
+            }
+            else
+            {
+                return (
+                    <View style={styles.container}>
+                        <Text>{this.props.nom_soft_skill}</Text>
+                        <Image source={{uri: this.props.chemin_badge}} style={styles.photo}/>
+                        <Text>Aucun vote obtenue</Text>
+                    </View>
+                );
+            }
         }
     }
 }
@@ -66,11 +88,11 @@ export default class Avancement_Categorie extends React.Component {
 
 
 const styles = StyleSheet.create({
-    boxStyle: {
-        height: 200,
-        width: '40%',
-        margin: 5,
-    },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
     touchable: {
         height: '70%',
         width: '100%',
@@ -84,5 +106,9 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         width: '100%',
-    }
+    },
+    photo: {
+        height: 100,
+        width: 100
+      },
 });

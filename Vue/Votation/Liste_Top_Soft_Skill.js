@@ -63,7 +63,7 @@ export default class Liste_Top_Soft_Skill extends React.Component {
     } else {
       return (
         <View style={{flex: 1}}>
-          <Text style={styles.text}>Vote pour : {this.params.name} Periode: {this.params.id_periode}</Text>
+          <Text style={styles.text}>Vote pour : {this.params.name}</Text>
           <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
                 return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.nom, item.id, this.params.id_personne_vote, this.params.id_user, this.params.id_periode)}</View>;

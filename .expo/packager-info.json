@@ -1,9 +1,9 @@
 {
+  "packagerPort": 19001,
+  "packagerPid": 7232,
+  "devToolsPort": 19002,
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://yp-bnj.anonymous.reactnativeyoubyme.exp.direct",
   "packagerNgrokUrl": "https://packager.yp-bnj.anonymous.reactnativeyoubyme.exp.direct",
-  "ngrokPid": 2792,
-  "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 12308
+  "ngrokPid": 17144
 }
