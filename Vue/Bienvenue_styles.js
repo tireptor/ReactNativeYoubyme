@@ -19,6 +19,7 @@ export default StyleSheet.create({
       justifyContent: 'center',
       flexDirection: 'column',
       alignItems: 'center',
+      marginTop: 50
       }, 
       returnButton: {
         position: 'absolute',

@@ -70,7 +70,7 @@ export default class Liste_User_Vote extends React.Component {
                 {this.state.items.map(item => {
                 return <View style={styles.boxStyle} key={item.id_t_personne}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.photo, item.id_t_personne, this.params.id_user, this.params.id_periode, this.props.navigation)}</View>;
                 })}   
-            </ScrollView>        
+            </ScrollView>     
       </View>
       );
     }
@@ -83,9 +83,14 @@ export default class Liste_User_Vote extends React.Component {
 
 
 const styles = StyleSheet.create({
+  scrollTest: {
+    flexGrow: 1, 
+    flexDirection: 'row', 
+    justifyContent: 'center', 
+    borderColor: 'black',
+    borderWidth: 1,
+  },
   boxStyle: {
-    height: 200, 
-    width: '40%', 
     margin: 5,
   },
   touchable: {

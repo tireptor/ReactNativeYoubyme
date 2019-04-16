@@ -107,8 +107,7 @@ export default class Bienvenue extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.pictureContainer}>
-          {this.renderAvatar(picture)}
-          
+          {this.renderAvatar(picture)}    
           <Text style={styles.title}>Bienvenue {nom}</Text>
         </View>
         <View style={styles.containerButton}>
