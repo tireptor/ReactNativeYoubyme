@@ -29,10 +29,23 @@ export default class Vote_User extends React.Component {
   }
 
   testRefresh = () => {
-    console.log("youhou")
-    this.setState({
-      items: 1
-    });
+    fetch("http://192.168.43.206:1337/vote/checkIfUserVoted/" + this.props.id_user + "/" + this.props.id_personne + "/" + this.props.id_periode)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result
+          }
+          );          
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
   }
 
   componentDidMount()
@@ -80,8 +93,10 @@ export default class Vote_User extends React.Component {
       else{
         return(
         <View style={styles.container}>
+        <TouchableOpacity onPress={this.VoteSoftSkill} style={styles.container}>
           <Image source={{uri: this.props.photo}} style={styles.touchableGrey}/> 
           <Text>DEJA VOTE</Text>
+        </TouchableOpacity>
         </View>
         )
       }

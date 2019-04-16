@@ -22,6 +22,8 @@ export default class Un_Soft_Skill extends React.Component {
     };   
   }
 
+  //Besoin d'une route ou l'on specifie : Id User, IdPersonne vote, Id periode, Id softSkill afin de savoir si un vote a ete effectue ou non
+
   _retrieveData = async (result) => {
     try {
       const tryToken = await AsyncStorage.getItem('token');
@@ -38,6 +40,42 @@ export default class Un_Soft_Skill extends React.Component {
 
   componentWillMount() {
     this._retrieveData() 
+  }
+
+  checkIfVoted = () => {
+    fetch("http://192.168.43.206:1337/vote/checkVoted/", {
+      method: 'POST',
+      headers: {
+      "Authorization": "Bearer " + this.state.token,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+      idPeriode: this.props.id_periode,
+      idPersVotant: this.props.id_user,
+      idPersVote: this.props.id_personne_vote,
+      idSoftSkill: this.props.id_soft_skill,
+      }),
+    }) 
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+          }         
+          );
+          console.log(result)
+          userVoteItems = 1 
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+    this.props.VoteUserItems()
+    console.log("Ajout, id softSkill : " + idSoftSkill + " ID personne voté : " + idPersonneVote + " ID user: " + idUser + " ID periode: " + idPeriode);  
   }
 
   

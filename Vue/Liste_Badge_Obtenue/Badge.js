@@ -15,33 +15,27 @@ export default class Badge extends React.Component {
     render() {
       const { navigate } = this.props.customProps;
       return (
-        <View>
+        <TouchableOpacity style={styles.container} onPress={this.ListeSoftskill}>
             <Image source={{uri: this.props.chemin_badge}} style={styles.touchable}/>       
-            <TouchableOpacity onPress={this.ListeSoftskill}>
-                <Text style={styles.text}>{this.props.nom_badge}</Text>              
-            </TouchableOpacity>        
-        </View>
+            <Text style={styles.text}>{this.props.nom_badge}</Text>              
+        </TouchableOpacity>        
       );
     }
   }
   const styles = StyleSheet.create({
-    boxStyle: {
-      height: 200, 
-      width: '40%', 
-      margin: 5,
+    container: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     touchable: {
-        height: '70%',
-        width: '100%',
+        height: 150,
+        width: 150,
         justifyContent: 'center'
-    },
-    vote_button: {
-        height: 40, 
-        width: '100%', 
-        marginTop: 10
-    },
+    },  
     text : {
       textAlign: 'center',
       width: '100%',
+      margin: 5,
     }
   });

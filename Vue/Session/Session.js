@@ -34,7 +34,6 @@ export default class Session extends React.Component {
 
 
 
-
   render() {
     const { navigate } = this.props.customProps;
     return (

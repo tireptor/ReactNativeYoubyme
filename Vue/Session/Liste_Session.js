@@ -24,11 +24,8 @@ export default class List_Session extends React.Component {
 
   _retrieveData = async (result) => {
     try {
-      console.log('On est passé dans retrieveData');
       const value = await AsyncStorage.getItem('promo');
       if (value !== null) {
-        // We have data!!
-        console.log(value);
         this.setState({
           promo : value
         }
@@ -45,16 +42,15 @@ export default class List_Session extends React.Component {
   };
 
   GatherDataFromBase() {
-    fetch("http://192.168.43.206:1337/vote/getAllSessionVoteWithPilotWherePromo/" + this.state.promo)
+    fetch("http://192.168.43.206:1337/vote/getAllSessionActiveWithPilotVoteWherePromo/" + this.state.promo)
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
             items: result
-          }, () => {
-            console.log("Pomme : \n", this.state.items);
-          });          
+          }
+          );          
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -78,7 +74,7 @@ export default class List_Session extends React.Component {
     const { error, isLoaded, items } = this.state;
     if (error) {
       return <View style={[styles.container, styles.horizontal]}>
-                <Text>Erreur : {error.message}</Text>;
+                <Text>Erreur : {error.message}</Text>
             </View>
     } else if (!isLoaded) {
       return <View style={[styles.container, styles.horizontal]}>
