@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Alert, Text  } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert, Text, AsyncStorage  } from 'react-native';
 import { TextInput } from 'react-native';
 
 
@@ -20,21 +20,20 @@ export default class Un_Soft_Skill extends React.Component {
       idVoteEffectue: "",
       token: "",
     };
-    this._retrieveData()
-    
+    this._retrieveData() 
   }
 
   _retrieveData = async (result) => {
     try {
-      const token = await AsyncStorage.getItem('token');
-      if (token !== null) {
+      const tryToken = await AsyncStorage.getItem('token');
+      if (tryToken !== null) {
         this.setState({
-          token : value
+          token : tryToken
         }
         ); 
       }
     } catch (error) {
-      console.log('erreur lors de la récuperation de données (constructor)')
+      console.log("erreur pour recuperer le token")
     }
   }
 
@@ -44,7 +43,7 @@ export default class Un_Soft_Skill extends React.Component {
     fetch("http://192.168.43.206:1337/vote/voteUser" , {
       method: 'POST',
       headers: {
-      Authorization: 'tokenHere',
+      "Authorization": "Bearer " + this.state.token,
       Accept: 'application/json',
       'Content-Type': 'application/json',
       },
@@ -85,6 +84,7 @@ export default class Un_Soft_Skill extends React.Component {
     fetch("http://192.168.43.206:1337/vote/" + this.state.idVoteEffectue , {
       method: 'DELETE',
       headers: {
+      "Authorization": "Bearer " + this.state.token,
       Accept: 'application/json',
       'Content-Type': 'application/json',
       },
@@ -108,6 +108,7 @@ export default class Un_Soft_Skill extends React.Component {
             isLoaded: true,
             error
           });
+          console.log("Erreur : " + error)
         }
       )
   }

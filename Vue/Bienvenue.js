@@ -10,7 +10,7 @@ export default class Bienvenue extends React.Component {
   static navigationOptions = { title: 'Bienvenue', header: null }; 
   constructor(props) {
     super(props);
-    this.state = { Email: 'Email', Password: 'Password', nom : 'bidon', picture : 'http://192.168.43.206:1337/images/images_youbyme/portrait.png' };
+    this.state = { Email: 'Email', Password: 'Password', nom : 'bidon', picture : 'http://192.168.43.206:1337/images/images_youbyme/portrait.png', token: "" };
     this._retrieveData()
   }
   _retrieveData = async (result) => {
@@ -33,7 +33,6 @@ export default class Bienvenue extends React.Component {
       console.log('erreur lors de la récuperation de données (retrieveDate)')
     }
     try {
-      console.log("On vat chercher l'image");
       const valuePicture = await AsyncStorage.getItem('picture');
       if (valuePicture !== null) {
         // We have data!!
@@ -45,6 +44,19 @@ export default class Bienvenue extends React.Component {
       }
     } catch (error) {
       console.log("erreur pour afficher l'image")
+    }
+    try {
+      const tryToken = await AsyncStorage.getItem('token');
+      if (tryToken !== null) {
+        // We have data!!
+        console.log("Token : " + tryToken);
+        this.setState({
+          token : tryToken
+        }
+        ); 
+      }
+    } catch (error) {
+      console.log("erreur pour recuperer le token")
     }
   };
   _removeCredentialData = async (result) => {
