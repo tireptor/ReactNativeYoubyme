@@ -25,6 +25,7 @@ export default class Vote_User extends React.Component {
       id_user: this.props.id_user,
       id_periode: this.props.id_periode,
       VoteUserItems: this.testRefresh,
+      RefreshSession: this.props.RefreshSession
     });
   }
 

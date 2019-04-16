@@ -102,7 +102,7 @@ export default class Un_Soft_Skill extends React.Component {
             checked: true, 
             idVoteEffectue: result
           },
-          this.props.VoteUserItems()
+          this.props.VoteUserItems(),
           );
         },
         (error) => {
@@ -168,7 +168,7 @@ export default class Un_Soft_Skill extends React.Component {
           <View  style={styles.otherContainer}>
             <TouchableOpacity style={styles.touchable} onPress={() => this.retirePoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            
               <Text style={styles.buttonChecked}>Annuler le point</Text>                    
-            </TouchableOpacity>
+            </TouchableOpacity> 
           </View>                    
         </View>
       );

@@ -68,16 +68,16 @@ export default class Liste_User_Vote extends React.Component {
             <Text style={styles.text}>Eleves disponibles</Text>
             <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
-                return <View style={styles.boxStyle} key={item.id_t_personne}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.photo, item.id_t_personne, this.params.id_user, this.params.id_periode, this.props.navigation)}</View>;
+                return <View style={styles.boxStyle} key={item.id_t_personne}>{this.renderSquare(item.nom_t_personne, item.prenom_t_personne, item.photo, item.id_t_personne, this.params.id_user, this.params.id_periode, this.props.navigation, this.props.RefreshSession)}</View>;
                 })}   
-            </ScrollView>     
+            </ScrollView> 
       </View>
       );
     }
   }
 
-  renderSquare(nom, prenom, image, idPersonne, idUser, idPeriode, CustomNavigation) {
-    return <Vote_User nom_t_personne={nom} prenom_t_personne={prenom} photo={image} id_personne={idPersonne} id_user={idUser} id_periode={idPeriode} customProps={CustomNavigation} />;
+  renderSquare(nom, prenom, image, idPersonne, idUser, idPeriode, CustomNavigation, funcRefreshSession) {
+    return <Vote_User nom_t_personne={nom} prenom_t_personne={prenom} photo={image} id_personne={idPersonne} id_user={idUser} id_periode={idPeriode} customProps={CustomNavigation} refreshSession={funcRefreshSession}  />;
   } 
 }
 

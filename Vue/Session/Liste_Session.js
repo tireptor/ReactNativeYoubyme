@@ -49,7 +49,7 @@ export default class List_Session extends React.Component {
           this.setState({
             isLoaded: true,
             items: result
-          }
+          },
           );          
         },
         // Note: it's important to handle errors here
@@ -63,6 +63,9 @@ export default class List_Session extends React.Component {
         }
       )
   }
+
+
+  
 
   renderSquare(nom, prenom, idPersSession, photoPersSession, dateDebut, dateFin, idPeriode, idUser, CustomNavigation) {
     return <Session nom_t_personne={nom} prenom_t_personne={prenom} id_Pers_Session={idPersSession} photo_Pers_Session={photoPersSession} date_Debut={dateDebut} date_Fin={dateFin} id_periode={idPeriode} id_user={idUser} customProps={CustomNavigation}  />;
