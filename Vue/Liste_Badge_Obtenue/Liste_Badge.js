@@ -60,7 +60,7 @@ export default class Liste_Badge extends React.Component {
              </View>
     } else {
       return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, top: 25}}>
             <ScrollView contentContainerStyle={{flexGrow: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {this.state.items.map(item => {
                 return <View style={styles.boxStyle} key={item.id}>{this.renderSquare(item.id, item.nom_badge, item.chemin_badge, this.props.navigation)}</View>;

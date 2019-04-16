@@ -23,7 +23,7 @@ export default StyleSheet.create({
       returnButton: {
         position: 'absolute',
         left: 0,
-        top: 0,
+        top: 25,
         width: 40,
         height: 40,
       }, 

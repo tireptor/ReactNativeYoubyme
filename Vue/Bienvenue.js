@@ -35,8 +35,6 @@ export default class Bienvenue extends React.Component {
     try {
       const valuePicture = await AsyncStorage.getItem('picture');
       if (valuePicture !== null) {
-        // We have data!!
-        console.log(valuePicture);
         this.setState({
           picture : valuePicture
         }
@@ -48,8 +46,6 @@ export default class Bienvenue extends React.Component {
     try {
       const tryToken = await AsyncStorage.getItem('token');
       if (tryToken !== null) {
-        // We have data!!
-        console.log("Token : " + tryToken);
         this.setState({
           token : tryToken
         }
@@ -92,7 +88,6 @@ export default class Bienvenue extends React.Component {
     });
   }
   ListeTopSoftSkill = () => {
-    console.log("on entre dans listeTopSoftSkill !")
     this.props.navigation.navigate("Liste_Top_Soft_Skill", {
       userId: this.state.id_user,
     });
@@ -105,8 +100,7 @@ export default class Bienvenue extends React.Component {
     const {nom,picture} = this.state;
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        
+      <View style={styles.container}>     
         <View style={styles.returnButton}>
           <TouchableOpacity onPress={this.Deconnexion}>
             <Image source={require('./../assets/Image/retour.png')}/>
