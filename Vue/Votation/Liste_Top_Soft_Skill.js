@@ -53,17 +53,13 @@ export default class Liste_Top_Soft_Skill extends React.Component {
   }
   render() {
     const { error, isLoaded } = this.state;
-    console.log("On est dans le render")
     if (error) {
-      console.log("On est en erreur : " + error.message)
       return <Text>{error.message}</Text>;
     } else if (!isLoaded) {
-      console.log("On est pas chargé")
       return <View style={[styles.container, styles.horizontal]}>
               <ActivityIndicator size="large" color="#0000ff" />
              </View>
     } else {
-      console.log("Dernier return")
       return (
         <View style={{flex: 1}}>
           <Text style={styles.text}>Mes 5 meilleurs softskill !</Text>
