@@ -24,6 +24,7 @@ export default class Un_Soft_Skill extends React.Component {
     fetch("http://192.168.43.206:1337/vote/voteUser" , {
       method: 'POST',
       headers: {
+      Authorization: 'tokenHere',
       Accept: 'application/json',
       'Content-Type': 'application/json',
       },
