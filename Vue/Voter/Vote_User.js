@@ -82,6 +82,7 @@ export default class Vote_User extends React.Component {
         <View style={styles.container}>
           <Image source={{uri: this.props.photo}} style={styles.touchable}/> 
           <Text>DEJA VOTE</Text>
+          <View style={styles.overlay} />
         </View>
         )
       }
@@ -96,6 +97,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.3)',
   },
   boxStyle: {
     height: 200, 

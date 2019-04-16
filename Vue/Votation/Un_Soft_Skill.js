@@ -17,8 +17,28 @@ export default class Un_Soft_Skill extends React.Component {
       isLoaded: false,
       items: [],
       checked: false,
+      idVoteEffectue: "",
+      token: "",
     };
+    this._retrieveData()
+    
   }
+
+  _retrieveData = async (result) => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      if (token !== null) {
+        this.setState({
+          token : value
+        }
+        ); 
+      }
+    } catch (error) {
+      console.log('erreur lors de la récuperation de données (constructor)')
+    }
+  }
+
+  
 
   ajoutPoint = (idSoftSkill, idPersonneVote, idUser, idPeriode) => {
     fetch("http://192.168.43.206:1337/vote/voteUser" , {
@@ -40,7 +60,8 @@ export default class Un_Soft_Skill extends React.Component {
           this.setState({
             isLoaded: true,
             items: result,
-            checked: true
+            checked: true, 
+            idVoteEffectue: result
           }
           );
           userVoteItems = 1 
@@ -57,9 +78,37 @@ export default class Un_Soft_Skill extends React.Component {
   }
 
   retirePoint = () => {
-    this.setState({
-      checked: false
-    })
+    console.log("retirer point")
+    console.log("Id vote : " + this.state.idVoteEffectue)
+    console.log("Token : " + this.state.token)
+    fetch("http://192.168.43.206:1337/vote/" + this.state.idVoteEffectue , {
+      method: 'DELETE',
+      headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+      }),
+    }) 
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result,
+            checked: false, 
+          },
+          console.log(result)
+          );
+          userVoteItems = 1 
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
   }
 
   render() {
@@ -70,7 +119,7 @@ export default class Un_Soft_Skill extends React.Component {
           <Text style={styles.text}>{this.props.nom_t_personne}</Text>
           <View  style={styles.otherContainer}>
             <TouchableOpacity style={styles.touchable} onPress={() => this.retirePoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            
-              <Text style={styles.buttonChecked}>+</Text>                    
+              <Text style={styles.buttonChecked}>Annuler le point</Text>                    
             </TouchableOpacity>
           </View>                    
         </View>
@@ -83,9 +132,9 @@ export default class Un_Soft_Skill extends React.Component {
           <Text style={styles.text}>{this.props.nom_t_personne}</Text>
           <View  style={styles.otherContainer}>
             <TouchableOpacity style={styles.touchable} onPress={() => this.ajoutPoint(this.props.id_soft_skill, this.props.id_personne_vote, this.props.id_user, this.props.id_periode)}>            
-              <Text style={styles.button}>+</Text>                    
+              <Text style={styles.button}>Ajouter un point</Text>                    
             </TouchableOpacity>
-          </View>                    
+          </View>
         </View>
       );
     }
@@ -116,7 +165,7 @@ const styles = StyleSheet.create({
     margin: 10
   },
   button: {
-    width: 50,
+    width: 100,
     height: 40,
     borderWidth: 1,
     textAlign: 'center',
@@ -124,10 +173,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     lineHeight:35,
-    fontSize:20,
+    fontSize:12,
   },
   buttonChecked: {
-    width: 50,
+    width: 100,
     height: 40,
     borderWidth: 1,
     textAlign: 'center',
@@ -135,8 +184,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     lineHeight:35,
-    fontSize:20,
-    backgroundColor: 'green'
+    fontSize:12,
+    backgroundColor: 'green',
+    color: 'white'
   },
   touchable: {
     justifyContent: 'center',
