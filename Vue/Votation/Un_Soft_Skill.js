@@ -19,8 +19,7 @@ export default class Un_Soft_Skill extends React.Component {
       checked: false,
       idVoteEffectue: "",
       token: "",
-    };
-    this._retrieveData() 
+    };   
   }
 
   _retrieveData = async (result) => {
@@ -35,6 +34,10 @@ export default class Un_Soft_Skill extends React.Component {
     } catch (error) {
       console.log("erreur pour recuperer le token")
     }
+  }
+
+  componentWillMount() {
+    this._retrieveData() 
   }
 
   

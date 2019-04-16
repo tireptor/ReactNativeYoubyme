@@ -70,7 +70,7 @@ export default class Vote_User extends React.Component {
       {
         return (
           <View style={styles.container}> 
-            <TouchableOpacity onPress={this.VoteSoftSkill}>
+            <TouchableOpacity onPress={this.VoteSoftSkill} style={styles.container}>
                 <Image source={{uri: this.props.photo}} style={styles.touchable}/>                
                 <Text style={styles.text}>{this.props.nom_t_personne} {this.props.prenom_t_personne}</Text>           
             </TouchableOpacity>       
@@ -80,9 +80,8 @@ export default class Vote_User extends React.Component {
       else{
         return(
         <View style={styles.container}>
-          <Image source={{uri: this.props.photo}} style={styles.touchable}/> 
+          <Image source={{uri: this.props.photo}} style={styles.touchableGrey}/> 
           <Text>DEJA VOTE</Text>
-          <View style={styles.overlay} />
         </View>
         )
       }
@@ -98,14 +97,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-  },
   boxStyle: {
     height: 200, 
     width: '40%', 
@@ -116,10 +107,12 @@ const styles = StyleSheet.create({
       width: 100,
       justifyContent: 'center'
   },
-  vote_button: {
-      height: 40, 
-      width: '100%', 
-      marginTop: 10
+  touchableGrey: {
+    height: 100,
+    width: 100,
+    justifyContent: 'center',
+    backgroundColor: 'grey',
+    opacity: 0.3
   },
   text : {
     textAlign: 'center',
