@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Alert, Text, AsyncStorage  } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert, Text, AsyncStorage, ActivityIndicator  } from 'react-native';
 import { TextInput } from 'react-native';
 
 
@@ -40,23 +40,11 @@ export default class Un_Soft_Skill extends React.Component {
 
   componentWillMount() {
     this._retrieveData() 
+    this.checkIfVoted()
   }
 
   checkIfVoted = () => {
-    fetch("http://192.168.43.206:1337/vote/checkVoted/", {
-      method: 'POST',
-      headers: {
-      "Authorization": "Bearer " + this.state.token,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-      idPeriode: this.props.id_periode,
-      idPersVotant: this.props.id_user,
-      idPersVote: this.props.id_personne_vote,
-      idSoftSkill: this.props.id_soft_skill,
-      }),
-    }) 
+    fetch("http://192.168.43.206:1337/vote/getIfVoteDone/" + this.props.id_user + "/" + this.props.id_personne_vote + "/" + this.props.id_periode + "/" + this.props.id_soft_skill) 
       .then(res => res.json())
       .then(
         (result) => {
@@ -64,8 +52,20 @@ export default class Un_Soft_Skill extends React.Component {
             isLoaded: true,
           }         
           );
-          console.log(result)
-          userVoteItems = 1 
+          if(result.length <= 0)
+          {
+            this.setState({
+              checked: false,
+            }         
+            );
+          }
+          else {
+            this.setState({
+              checked: true,
+              idVoteEffectue: result[0].id
+            }         
+            );
+          }
         },
         (error) => {
           this.setState({
@@ -74,8 +74,6 @@ export default class Un_Soft_Skill extends React.Component {
           });
         }
       )
-    this.props.VoteUserItems()
-    console.log("Ajout, id softSkill : " + idSoftSkill + " ID personne voté : " + idPersonneVote + " ID user: " + idUser + " ID periode: " + idPeriode);  
   }
 
   
@@ -103,9 +101,9 @@ export default class Un_Soft_Skill extends React.Component {
             items: result,
             checked: true, 
             idVoteEffectue: result
-          }
+          },
+          this.props.VoteUserItems()
           );
-          userVoteItems = 1 
         },
         (error) => {
           this.setState({
@@ -114,14 +112,12 @@ export default class Un_Soft_Skill extends React.Component {
           });
         }
       )
-    this.props.VoteUserItems()
+    
     console.log("Ajout, id softSkill : " + idSoftSkill + " ID personne voté : " + idPersonneVote + " ID user: " + idUser + " ID periode: " + idPeriode);  
   }
 
   retirePoint = () => {
-    console.log("retirer point")
-    console.log("Id vote : " + this.state.idVoteEffectue)
-    console.log("Token : " + this.state.token)
+    console.log("retire point")
     fetch("http://192.168.43.206:1337/vote/" + this.state.idVoteEffectue , {
       method: 'DELETE',
       headers: {
@@ -140,9 +136,9 @@ export default class Un_Soft_Skill extends React.Component {
             items: result,
             checked: false, 
           },
+          this.props.VoteUserItems(),
           console.log(result)
           );
-          userVoteItems = 1 
         },
         (error) => {
           this.setState({
@@ -152,11 +148,20 @@ export default class Un_Soft_Skill extends React.Component {
           console.log("Erreur : " + error)
         }
       )
+      
   }
 
   render() {
-    if(this.state.checked)
-    {
+    const { error, isLoaded, items } = this.state;
+    if (error) {
+      return <View style={[styles.container, styles.horizontal]}>
+                <Text>{error.message}</Text>
+            </View>
+    } else if (!isLoaded) {
+      return <View style={[styles.container, styles.horizontal]}>
+              <ActivityIndicator size="large" color="#0000ff" />
+             </View>
+    } else if(this.state.checked){
       return (
         <View  style={styles.container}>
           <Text style={styles.text}>{this.props.nom_t_personne}</Text>

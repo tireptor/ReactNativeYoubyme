@@ -29,7 +29,7 @@ export default class List_Soft_Skill extends React.Component {
             isLoaded: true,
             items: result
           }, () => {
-            console.log("Pomme : \n", this.state.items);
+            
           });          
         },
         // Note: it's important to handle errors here
