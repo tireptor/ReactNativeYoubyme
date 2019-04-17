@@ -17,24 +17,39 @@ export default class Liste_User_Vote extends React.Component {
         isLoaded: false,
         items: [],
         promo: "",
+        idUser: "",
       };
     this.params = this.props.navigation.state.params;
     this._retrieveData();
   }
 
   _retrieveData = async (result) => {
+    value = ""
+    valueId = ""
     try {
-      const value = await AsyncStorage.getItem('promo');
+      value = await AsyncStorage.getItem('promo');
       if (value !== null) {
         this.setState({
           promo : value
         },
-        this.appelPromo(value)
+        ); 
+      }
+    } catch (error) {
+      console.log('erreur lors de la récuperation de la promo (retrieveDate)' + error)
+    }
+    try {
+      valueId = await AsyncStorage.getItem('id');
+      if (valueId !== null) {
+        this.setState({
+          idUser : valueId
+        },
         ); 
       }
     } catch (error) {
       console.log('erreur lors de la récuperation de la promo (retrieveDate)')
     }
+    console.log(value +" "+ valueId)
+    this.appelPromo(value,valueId)
   }
 
 
@@ -47,8 +62,8 @@ export default class Liste_User_Vote extends React.Component {
     ); 
   }
 
-  appelPromo(promo) {
-    fetch("http://192.168.43.206:1337/promo/getAllStudentInPromo/" + promo)
+  appelPromo(promo,idUser) {
+    fetch("http://192.168.43.206:1337/promo/getAllStudentInPromo/" + promo + '/'+idUser)
       .then(res => res.json())
       .then(
         (result) => {

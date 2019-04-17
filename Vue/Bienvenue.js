@@ -22,7 +22,7 @@ export default class Bienvenue extends React.Component {
   }
   _retrieveData = async (result) => {
     try {
-      const value = await AsyncStorage.getItem('nom');
+      const value = await AsyncStorage.getItem('prenom');
       if (value !== null) {
         this.setState({
           nom : value
@@ -124,6 +124,7 @@ export default class Bienvenue extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={styles.pictureContainer}>
+          {console.log("coucou : "+picture)}
             {this.renderAvatar(picture)}    
             <Text style={styles.title}>Bienvenue {nom}</Text>
           </View>

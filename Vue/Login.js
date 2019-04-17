@@ -11,7 +11,7 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { Email: 'marc.olivier@gmail.com', Password: '741', items: [], IsConnected : false, ConnectionEnCours : false, IsLoaded : false, BadCredential : false };
+    this.state = { Email: 'vincent.lafargue@gmail.com', Password: '741', items: [], IsConnected : false, ConnectionEnCours : false, IsLoaded : false, BadCredential : false };
     this.CheckUserIsAlreadyConnected()
   }
   _storeCredentialData = async (result) => {
@@ -132,7 +132,7 @@ export default class Login extends React.Component {
       return (
         <View style={styles.container}>
           <View style={styles.container}>
-           <Image source={require('./../assets/Image/YouByMe_Logo.png')}/>
+           <Image source={require('./../assets/Image/YouByMe_Logo.png')} style={styles.picture}/>
           </View>
           <Text style={styles.title}>Connectez vous</Text>
           <View style={styles.containerCredential}>
@@ -150,7 +150,7 @@ export default class Login extends React.Component {
           </View>
           <View style={styles.container}>
             <TouchableOpacity style={{height: 40, width: 300, borderColor: 'black',margin: '1%'}} onPress={this.Connexion}>
-              <Image source={require('./../assets/Image/btn_connexion.png')}/>
+              <Image source={require('./../assets/Image/btn_connexion.png')} style={styles.pictureBtnCo}/>
             </TouchableOpacity>
           </View>
         </View>
@@ -159,7 +159,7 @@ export default class Login extends React.Component {
     else{return (
       <View style={styles.container}>
         <View style={styles.container}>
-         <Image source={require('./../assets/Image/YouByMe_Logo.png')}/>
+         <Image source={require('./../assets/Image/YouByMe_Logo.png')} style={styles.picture}/>
         </View>
         <Text style={styles.title}>Connectez vous</Text>
         <View style={styles.containerCredential}>
@@ -175,8 +175,8 @@ export default class Login extends React.Component {
         />
         </View>
         <View style={styles.container}>
-          <TouchableOpacity style={{height: 40, width: 300, borderColor: 'black',margin: '1%'}} onPress={this.Connexion}>
-            <Image source={require('./../assets/Image/btn_connexion.png')}/>
+          <TouchableOpacity style={{height: 60, width: 300, borderColor: 'black',margin: '1%'}} onPress={this.Connexion}>
+            <Image source={require('./../assets/Image/btn_connexion.png')} style={styles.pictureBtnCo}/>
           </TouchableOpacity>
         </View>
       </View>
@@ -200,6 +200,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  picture: {
+    width:300,
+    height:150,
+    resizeMode: "contain",
+    alignItems: 'center',
+  },
+  pictureBtnCo: {
+    width:300,
+    height:60,
+    resizeMode: "contain",
+    alignItems: 'center',
   },
   horizontal: {
     flexDirection: 'row',
