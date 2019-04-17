@@ -28,7 +28,7 @@ export default class Session extends React.Component {
 
   ParseDate = () => {
     var d = new Date(this.props.date_Fin);
-    var dateFin = d.getUTCDate() +  "/" + d.getMonth() + "/" + d.getUTCFullYear();
+    var dateFin = d.getUTCDate() +  "/" + (d.getMonth() + 1) + "/" + d.getUTCFullYear();
     this.state.dateFormated = dateFin;
     console.log("Date : " + this.state.dateFormated);
   }
