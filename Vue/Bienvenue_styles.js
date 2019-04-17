@@ -13,6 +13,15 @@ export default StyleSheet.create({
         justifyContent: 'center',
         marginTop: 5
     },
+    container: {
+      flex: 1,
+      justifyContent: 'center'
+    },
+    horizontal: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      padding: 10
+    },
     pictureContainer: {
       flex: 1,
       justifyContent: 'center',

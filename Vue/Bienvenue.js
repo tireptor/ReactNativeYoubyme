@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity, AsyncStorage  } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Alert, TouchableOpacity, AsyncStorage, ActivityIndicator  } from 'react-native';
 import { AppRegistry, TextInput } from 'react-native';
 import Avatar from './Avatar/Avatar.js';
 
@@ -10,7 +10,14 @@ export default class Bienvenue extends React.Component {
   static navigationOptions = { title: 'Bienvenue', header: null }; 
   constructor(props) {
     super(props);
-    this.state = { Email: 'Email', Password: 'Password', nom : 'bidon', picture : 'http://192.168.43.206:1337/images/images_youbyme/portrait.png', token: "" };
+    this.state = { 
+      Email: 'Email', 
+      Password: 'Password', 
+      nom : 'bidon', 
+      picture : '', 
+      token: "",
+      imageLoaded: false,
+    };
     this._retrieveData()
   }
   _retrieveData = async (result) => {
@@ -36,7 +43,8 @@ export default class Bienvenue extends React.Component {
       const valuePicture = await AsyncStorage.getItem('picture');
       if (valuePicture !== null) {
         this.setState({
-          picture : valuePicture
+          picture : valuePicture,
+          imageLoaded: true,
         }
         ); 
       }
@@ -99,29 +107,39 @@ export default class Bienvenue extends React.Component {
   render() {
     const {nom,picture} = this.state;
     const { navigate } = this.props.navigation;
-    return (
-      <View style={styles.container}>     
-        <View style={styles.returnButton}>
-          <TouchableOpacity onPress={this.Deconnexion}>
-            <Image source={require('./../assets/Image/retour.png')}/>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.pictureContainer}>
-          {this.renderAvatar(picture)}    
-          <Text style={styles.title}>Bienvenue {nom}</Text>
-        </View>
-        <View style={styles.containerButton}>
-          <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
-            <Text>Liste des badges obtenus</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.ListeTopSoftSkill}>
-            <Text>Top Softskill !</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.ListeSession}>
-            <Text>Voter</Text>
-          </TouchableOpacity>
-        </View>       
-      </View>     
-    );
+    if((!this.state.imageLoaded)){
+      return(
+        <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size="large" color="#0000ff" />
+       </View>
+      );
+      
+    }
+    else {
+      return (
+        <View style={styles.container}>     
+          <View style={styles.returnButton}>
+            <TouchableOpacity onPress={this.Deconnexion}>
+              <Image source={require('./../assets/Image/retour.png')}/>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.pictureContainer}>
+            {this.renderAvatar(picture)}    
+            <Text style={styles.title}>Bienvenue {nom}</Text>
+          </View>
+          <View style={styles.containerButton}>
+            <TouchableOpacity style={styles.button} onPress={this.ListeBadge}>
+              <Text>Liste des badges obtenus</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.ListeTopSoftSkill}>
+              <Text>Top Softskill !</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.ListeSession}>
+              <Text>Voter</Text>
+            </TouchableOpacity>
+          </View>       
+        </View>     
+      );
+    }
   }
 }
