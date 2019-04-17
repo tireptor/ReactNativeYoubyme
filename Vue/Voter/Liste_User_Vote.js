@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator, AsyncStorage } from 'react-native';
 import { TextInput } from 'react-native';
 import Vote_User from './Vote_User.js';
 
@@ -16,14 +16,30 @@ export default class Liste_User_Vote extends React.Component {
         error: null,
         isLoaded: false,
         items: [],
+        promo: "",
       };
     this.params = this.props.navigation.state.params;
+    this._retrieveData();
+  }
+
+  _retrieveData = async (result) => {
+    try {
+      const value = await AsyncStorage.getItem('promo');
+      if (value !== null) {
+        this.setState({
+          promo : value
+        },
+        this.appelPromo(value)
+        ); 
+      }
+    } catch (error) {
+      console.log('erreur lors de la récuperation de la promo (retrieveDate)')
+    }
   }
 
 
 
   UpdatePageTemp = () => {
-    console.log("En theorie on a refresh");
     this.forceUpdate();
     this.setState({
       updated: true
@@ -31,8 +47,8 @@ export default class Liste_User_Vote extends React.Component {
     ); 
   }
 
-  componentDidMount() {
-    fetch("http://192.168.43.206:1337/promo/getAllStudentInPromo/RO2017RI")
+  appelPromo(promo) {
+    fetch("http://192.168.43.206:1337/promo/getAllStudentInPromo/" + promo)
       .then(res => res.json())
       .then(
         (result) => {
