@@ -37,7 +37,7 @@ export default class Bienvenue extends React.Component {
         ); 
       }
     } catch (error) {
-      console.log('erreur lors de la récuperation de données (retrieveDate)')
+      console.log('erreur lors de la récuperation de données')
     }
     try {
       const valuePicture = await AsyncStorage.getItem('picture');
