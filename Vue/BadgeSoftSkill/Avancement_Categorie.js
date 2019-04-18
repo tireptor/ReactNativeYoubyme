@@ -31,7 +31,7 @@ export default class Avancement_Categorie extends React.Component {
 
 
     loadedRetrieve(identifiant) {
-        fetch("http://192.168.43.206:1337/user/count/softskillByIdUserIdSoftSkill/" + identifiant + "/" + this.props.id_soft_skill)
+        fetch("http://51.255.162.109:1337/user/count/softskillByIdUserIdSoftSkill/" + identifiant + "/" + this.props.id_soft_skill)
             .then(res => res.json())
             .then(
                 (result) => {

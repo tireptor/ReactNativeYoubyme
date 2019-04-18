@@ -33,7 +33,7 @@ export default class Liste_Avancement_Categorie extends React.Component {
 
   
   componentDidMount() {
-    fetch("http://192.168.43.206:1337/softskill/categorie/" + this.params.id_badge)
+    fetch("http://51.255.162.109:1337/softskill/categorie/" + this.params.id_badge)
       .then(res => res.json())
       .then(
         (result) => {
