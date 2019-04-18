@@ -30,7 +30,7 @@ export default class Vote_User extends React.Component {
   }
 
   testRefresh = () => {
-    fetch("http://192.168.43.206:1337/vote/checkIfUserVoted/" + this.props.id_user + "/" + this.props.id_personne + "/" + this.props.id_periode)
+    fetch("http://51.255.162.109:1337/vote/checkIfUserVoted/" + this.props.id_user + "/" + this.props.id_personne + "/" + this.props.id_periode)
       .then(res => res.json())
       .then(
         (result) => {
@@ -51,7 +51,7 @@ export default class Vote_User extends React.Component {
 
   componentDidMount()
   {
-    fetch("http://192.168.43.206:1337/vote/checkIfUserVoted/" + this.props.id_user + "/" + this.props.id_personne + "/" + this.props.id_periode)
+    fetch("http://51.255.162.109:1337/vote/checkIfUserVoted/" + this.props.id_user + "/" + this.props.id_personne + "/" + this.props.id_periode)
       .then(res => res.json())
       .then(
         (result) => {

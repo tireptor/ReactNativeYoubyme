@@ -49,7 +49,7 @@ export default class Session extends React.Component {
     console.log("coucou")
     console.log(this.props.id_user )
     console.log(this.props.id_periode )
-    fetch("http://192.168.43.206:1337/vote/checkIfUserVotedForSession/" + this.props.id_user + "/" + this.props.id_periode)
+    fetch("http://51.255.162.109:1337/vote/checkIfUserVotedForSession/" + this.props.id_user + "/" + this.props.id_periode)
       .then(res => res.json())
       .then(
         (result) => {

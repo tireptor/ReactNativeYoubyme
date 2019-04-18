@@ -44,7 +44,7 @@ export default class Un_Soft_Skill extends React.Component {
   }
 
   checkIfVoted = () => {
-    fetch("http://192.168.43.206:1337/vote/getIfVoteDone/" + this.props.id_user + "/" + this.props.id_personne_vote + "/" + this.props.id_periode + "/" + this.props.id_soft_skill) 
+    fetch("http://51.255.162.109:1337/vote/getIfVoteDone/" + this.props.id_user + "/" + this.props.id_personne_vote + "/" + this.props.id_periode + "/" + this.props.id_soft_skill) 
       .then(res => res.json())
       .then(
         (result) => {
@@ -79,7 +79,7 @@ export default class Un_Soft_Skill extends React.Component {
   
 
   ajoutPoint = (idSoftSkill, idPersonneVote, idUser, idPeriode) => {
-    fetch("http://192.168.43.206:1337/vote/voteUser" , {
+    fetch("http://51.255.162.109:1337/vote/voteUser" , {
       method: 'POST',
       headers: {
       "Authorization": "Bearer " + this.state.token,
@@ -118,7 +118,7 @@ export default class Un_Soft_Skill extends React.Component {
 
   retirePoint = () => {
     console.log("retire point")
-    fetch("http://192.168.43.206:1337/vote/" + this.state.idVoteEffectue , {
+    fetch("http://51.255.162.109:1337/vote/" + this.state.idVoteEffectue , {
       method: 'DELETE',
       headers: {
       "Authorization": "Bearer " + this.state.token,
