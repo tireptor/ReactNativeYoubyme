@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator, ProgressBarAndroid } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert, ScrollView, Text, ActivityIndicator, ProgressBarAndroid, AsyncStorage } from 'react-native';
 
 export default class Avancement_Categorie extends React.Component {
 
@@ -8,13 +8,30 @@ export default class Avancement_Categorie extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
+            id: '',
         };
+        this._retrieveData();
+    }
+
+    _retrieveData = async (result) => {
+        try {
+          const value = await AsyncStorage.getItem('id');
+          if (value !== null) {
+            this.setState({
+              id : value,
+            },
+            this.loadedRetrieve(value),
+            ); 
+          }
+        } catch (error) {
+          console.log('erreur lors de la récuperation de données')
+        }
     }
 
 
-    componentDidMount() {
-        fetch("http://192.168.43.206:1337/user/count/softskillByIdUserIdSoftSkill/40/" + this.props.id_soft_skill)
+    loadedRetrieve(identifiant) {
+        fetch("http://192.168.43.206:1337/user/count/softskillByIdUserIdSoftSkill/" + identifiant + "/" + this.props.id_soft_skill)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -52,7 +69,7 @@ export default class Avancement_Categorie extends React.Component {
         const { error, isLoaded, items } = this.state;
         if (error) {
             return <View style={[styles.container, styles.horizontal]}>
-                <Text>Erreur : {error.message}</Text>;
+                <Text>{error.message}</Text>;
             </View>
         } else if (!isLoaded) {
             return <View style={[styles.container, styles.horizontal]}>
