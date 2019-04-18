@@ -42,7 +42,7 @@ export default class List_Session extends React.Component {
   };
 
   GatherDataFromBase() {
-    fetch("http://51.255.162.109:1337/vote/getAllSessionActiveWithPilotVoteWherePromo/" + this.state.promo)
+    fetch("http://192.168.43.206:1337/vote/getAllSessionActiveWithPilotVoteWherePromo/" + this.state.promo)
       .then(res => res.json())
       .then(
         (result) => {

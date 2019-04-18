@@ -21,7 +21,7 @@ export default class List_Soft_Skill extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://51.255.162.109:1337/softskill")
+    fetch("http://192.168.43.206:1337/softskill")
       .then(res => res.json())
       .then(
         (result) => {

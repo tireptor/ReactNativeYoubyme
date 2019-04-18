@@ -24,7 +24,7 @@ export default class Liste_Top_Soft_Skill extends React.Component {
       this.initPage()
   }
   initPage = () => {
-    fetch("http://51.255.162.109:1337/user/count/topSoftSkill/"+this.params.userId+"/5")
+    fetch("http://192.168.43.206:1337/user/count/topSoftSkill/"+this.params.userId+"/5")
       .then(res => res.json())
       .then(
         (result) => {

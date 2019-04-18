@@ -98,7 +98,7 @@ export default class Login extends React.Component {
     }
   }
   CheckConnection = () => {
-    fetch('http://51.255.162.109:1337/user/login', {
+    fetch('http://192.168.43.206:1337/user/login', {
     method: 'POST',
     headers: {
     Accept: 'application/json',

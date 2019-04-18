@@ -16,7 +16,7 @@ export default class Liste_Badge extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://51.255.162.109:1337/categorie")
+    fetch("http://192.168.43.206:1337/categorie")
       .then(res => res.json())
       .then(
         (result) => {
